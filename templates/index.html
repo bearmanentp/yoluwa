@@ -445,7 +445,7 @@
         </div>
     </section>
 
-    <!-- Model Download & Roboflow Section (새로 추가) -->
+    <!-- Model Download & Roboflow Section -->
     <section id="model-download" class="py-5">
         <div class="container py-5">
             <h2 class="text-center mb-5" data-aos="fade-down" data-translate-key="model_download_title">YOLO 모델 다운로드 및 커스텀 모델 제작</h2>
@@ -458,7 +458,7 @@
                         <i class="fas fa-cloud-download-alt icon mb-3"></i>
                         <h3 data-translate-key="download_pretrained_models_h">사전 훈련된 YOLO 모델 다운로드</h3>
                         <p data-translate-key="download_pretrained_models_p">Ultralytics에서 공식적으로 제공하는 다양한 크기와 성능의 YOLOv8 모델들을 다운로드하여 YoLuWa! 앱에서 바로 사용해보세요.</p>
-                        <a href="https://docs.ultralytics.com/models/yolov8/#models" target="_blank" class="btn btn-primary btn-lg mt-3" data-translate-key="ultralytics_website_btn" id="ultralyticsWebsiteBtn">Ultralytics 웹사이트로 이동</a>
+                        <a href="https://docs.ultralytics.com/models/yolov8/#models" target="_blank" class="btn btn-primary btn-lg mt-3" id="ultralyticsWebsiteBtn">Ultralytics 웹사이트로 이동</a>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5" data-aos="fade-left">
@@ -466,8 +466,8 @@
                         <i class="fas fa-magic icon mb-3"></i>
                         <h3 data-translate-key="roboflow_intro_h">Roboflow로 나만의 YOLO 모델 만들기</h3>
                         <p data-translate-key="roboflow_intro_p1">Roboflow는 데이터셋 관리, 어노테이션, 전처리, 증강 및 모델 훈련까지, YOLO 모델 개발의 모든 과정을 지원하는 강력한 플랫폼입니다. 미리 학습된 모델들을 체험해보고 자신만의 데이터를 활용해 새로운 모델을 만들어보세요!</p>
-                        <a href="https://roboflow.com/models" target="_blank" class="btn btn-secondary me-2 mt-3" data-translate-key="roboflow_explore_btn" id="roboflowExploreBtn">Roboflow 모델 체험하기</a>
-                        <a href="https://roboflow.com/" target="_blank" class="btn btn-primary mt-3" data-translate-key="roboflow_create_btn" id="roboflowCreateBtn">Roboflow에서 모델 만들기</a>
+                        <a href="https://roboflow.com/models" target="_blank" class="btn btn-secondary me-2 mt-3" id="roboflowExploreBtn">Roboflow 모델 체험하기</a>
+                        <a href="https://roboflow.com/" target="_blank" class="btn btn-primary mt-3" id="roboflowCreateBtn">Roboflow에서 모델 만들기</a>
                     </div>
                 </div>
             </div>
@@ -482,23 +482,23 @@
                 <!-- Bootstrap Tabs for different versions/OS -->
                 <ul class="nav nav-tabs justify-content-center mb-4" id="installTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="windows-tab" data-bs-toggle="tab" data-bs-target="#windows" type="button" role="tab" aria-controls="windows" aria-selected="true" data-translate-key="install_windows_btn">
-                            <i class="fab fa-windows me-2"></i>Windows
+                        <button class="nav-link active" id="windows-tab" data-bs-toggle="tab" data-bs-target="#windows" type="button" role="tab" aria-controls="windows" aria-selected="true">
+                            <i class="fab fa-windows me-2"></i><span data-translate-key="install_windows_btn">Windows</span>
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="mac-tab" data-bs-toggle="tab" data-bs-target="#mac" type="button" role="tab" aria-controls="mac" aria-selected="false" data-translate-key="install_mac_btn">
-                            <i class="fab fa-apple me-2"></i>macOS
+                        <button class="nav-link" id="mac-tab" data-bs-toggle="tab" data-bs-target="#mac" type="button" role="tab" aria-controls="mac" aria-selected="false">
+                            <i class="fab fa-apple me-2"></i><span data-translate-key="install_mac_btn">macOS</span>
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="linux-tab" data-bs-toggle="tab" data-bs-target="#linux" type="button" role="tab" aria-controls="linux" aria-selected="false" data-translate-key="install_linux_btn">
-                            <i class="fab fa-linux me-2"></i>Linux
+                        <button class="nav-link" id="linux-tab" data-bs-toggle="tab" data-bs-target="#linux" type="button" role="tab" aria-controls="linux" aria-selected="false">
+                            <i class="fab fa-linux me-2"></i><span data-translate-key="install_linux_btn">Linux</span>
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab" aria-controls="source" aria-selected="false" data-translate-key="install_source_btn">
-                            <i class="fas fa-code me-2"></i>소스 코드
+                        <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab" aria-controls="source" aria-selected="false">
+                            <i class="fas fa-code me-2"></i><span data-translate-key="install_source_btn">소스 코드</span>
                         </button>
                     </li>
                 </ul>
@@ -597,9 +597,9 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
             <div id="manual-download-section" class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
                 <h3 id="manualDownloadTitle" data-translate-key="manual_download_title">직접 다운로드 링크 (수동 업데이트 필요 시)</h3>
                 <p id="manualDownloadDesc" data-translate-key="manual_download_desc">각 플랫폼에 맞는 최신 버전을 다운로드하세요. 아래 링크는 <strong>수동으로 업데이트</strong>해야 합니다.</p>
-                <a href="#" id="manualWindowsDownload" download class="btn btn-outline-primary btn-lg mt-3 me-3" data-translate-key="manual_windows_download"><i class="fab fa-windows me-2"></i>Windows (.exe)</a>
-                <a href="#" id="manualMacDownload" download class="btn btn-outline-secondary btn-lg mt-3 me-3" data-translate-key="manual_mac_download"><i class="fab fa-apple me-2"></i>macOS (.zip)</a>
-                <a href="#" id="manualLinuxDownload" download class="btn btn-outline-success btn-lg mt-3 me-3" data-translate-key="manual_linux_download"><i class="fab fa-linux me-2"></i>Linux (.AppImage)</a>
+                <a href="#" id="manualWindowsDownload" download class="btn btn-outline-primary btn-lg mt-3 me-3"><i class="fab fa-windows me-2"></i><span data-translate-key="manual_windows_download">Windows (.exe)</span></a>
+                <a href="#" id="manualMacDownload" download class="btn btn-outline-secondary btn-lg mt-3 me-3"><i class="fab fa-apple me-2"></i><span data-translate-key="manual_mac_download">macOS (.zip)</span></a>
+                <a href="#" id="manualLinuxDownload" download class="btn btn-outline-success btn-lg mt-3 me-3"><i class="fab fa-linux me-2"></i><span data-translate-key="manual_linux_download">Linux (.AppImage)</span></a>
                 <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/archive/refs/heads/main.zip" target="_blank" class="btn btn-info btn-lg mt-3" data-translate-key="source_code_download" id="manualSourceDownload"><i class="fas fa-code me-2"></i>소스 코드 다운로드</a>
                 <p class="text-muted mt-3" id="manualUpdateNote" data-translate-key="manual_update_note">
                     자동 로딩되는 '이전 버전 다운로드' 섹션을 권장하며, 이곳의 링크는 수동으로 업데이트해야 합니다.
@@ -608,7 +608,7 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
         </div>
     </section>
 
-    <!-- Donate Section (새로 추가) -->
+    <!-- Donate Section -->
     <section id="donate" class="py-5 bg-light">
         <div class="container py-5" data-aos="fade-up">
             <h2 class="text-center mb-5" data-translate-key="donate_title" id="donateTitle">YoLuWa! 후원하기</h2>
@@ -666,8 +666,10 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
     <!-- AOS (Animate On Scroll) JavaScript CDN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- resources.js 파일 로드 (번역 데이터) -->
+    <!-- resources.js 파일 로드 (번역 데이터 로직과 WebSocket 로직) -->
+    <!-- 이 파일에 getTranslation, setLanguage, connectWebSocket 등의 함수가 정의됩니다. -->
     <script src="resources.js"></script> 
+    
     <script>
         // AOS 초기화
         AOS.init({
@@ -703,24 +705,27 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
             const releases = await fetchGitHubReleases();
             totalDownloadCount = 0; // 초기화
             const previousVersionsList = document.getElementById('previous-versions-list');
-            previousVersionsList.innerHTML = ''; // 기존 목록 비우기
+            if (previousVersionsList) previousVersionsList.innerHTML = ''; // 기존 목록 비우기
             const latestWindowsDownloadBtn = document.getElementById('latestWindowsDownload');
             const noDownloadsAvailable = document.getElementById('noDownloadsAvailable');
             const previousVersionsLoading = document.getElementById('previousVersionsLoading');
             if (previousVersionsLoading) previousVersionsLoading.style.display = 'none'; // 로딩 메시지 숨기기
             
             if (releases.length === 0) {
-                document.getElementById('totalDownloadCount').innerText = "0";
+                if (document.getElementById('totalDownloadCount')) document.getElementById('totalDownloadCount').innerText = "0";
                 if (noDownloadsAvailable) noDownloadsAvailable.style.display = 'block';
                 if (latestWindowsDownloadBtn) {
                     latestWindowsDownloadBtn.href = "#"; // 링크 비활성화
-                    latestWindowsDownloadBtn.textContent = getTranslation('no_downloads_available', currentLanguage);
+                    latestWindowsDownloadBtn.textContent = getTranslation('no_downloads_available');
                     latestWindowsDownloadBtn.classList.add('disabled'); // 버튼 비활성화 시각화
                 }
                 // 수동 다운로드 링크도 비활성화 처리
-                document.getElementById('manualWindowsDownload').href = "#";
-                document.getElementById('manualWindowsDownload').classList.add('disabled');
-                document.getElementById('manualWindowsDownload').textContent = getTranslation('no_downloads_available', currentLanguage);
+                const manualWindowsBtn = document.getElementById('manualWindowsDownload');
+                if(manualWindowsBtn) {
+                    manualWindowsBtn.href = "#";
+                    manualWindowsBtn.classList.add('disabled');
+                    manualWindowsBtn.textContent = getTranslation('no_downloads_available');
+                }
                 // 나머지 수동 다운로드 버튼도 필요에 따라 disabled 처리
                 // 예: document.getElementById('manualMacDownload').classList.add('disabled');
 
@@ -738,14 +743,14 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                     latestWindowsExeLink = windowsExeAsset.browser_download_url;
                     if (latestWindowsDownloadBtn) {
                         latestWindowsDownloadBtn.href = latestWindowsExeLink;
-                        latestWindowsDownloadBtn.textContent = `${getTranslation('install_windows_download_btn', currentLanguage)} (${latestRelease.tag_name})`;
+                        latestWindowsDownloadBtn.textContent = `${getTranslation('install_windows_download_btn')} (${latestRelease.tag_name})`;
                         latestWindowsDownloadBtn.classList.remove('disabled'); // 활성화
                     }
                     // 수동 다운로드 섹션의 Windows 링크 업데이트
                     const manualWindowsBtn = document.getElementById('manualWindowsDownload');
                     if (manualWindowsBtn) {
                         manualWindowsBtn.href = latestWindowsExeLink;
-                        manualWindowsBtn.textContent = `${getTranslation('manual_windows_download', currentLanguage)} (${latestRelease.tag_name})`;
+                        manualWindowsBtn.textContent = `${getTranslation('manual_windows_download')} (${latestRelease.tag_name})`;
                         manualWindowsBtn.classList.remove('disabled');
                     }
                 }
@@ -794,11 +799,11 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                         <div class="card">
                             <div class="card-header">
                                 <span class="badge bg-primary me-2">${release.tag_name}</span>
-                                <small class="text-muted">${getTranslation('release_tag_name', currentLanguage)}: ${release.tag_name} - ${new Date(release.published_at).toLocaleDateString()}</small>
+                                <small class="text-muted">${getTranslation('release_tag_name')}: ${release.tag_name} - ${new Date(release.published_at).toLocaleDateString()}</small>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">${release.name || release.tag_name} ${getTranslation('release_tag_name', currentLanguage)}</p>
-                                <p class="card-text text-muted small">${getTranslation('release_download_count', currentLanguage)}: ${releaseDownloadCount}</p>
+                                <p class="card-text">${release.name || release.tag_name} ${getTranslation('release_tag_name')}</p>
+                                <p class="card-text text-muted small">${getTranslation('release_download_count')}: ${releaseDownloadCount}</p>
                                 <div class="mt-3">
                                     ${assetsHtml.join('')}
                                 </div>
@@ -806,157 +811,41 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                         </div>
                     </div>
                 `;
-                previousVersionsList.innerHTML += releaseCard;
+                if (previousVersionsList) previousVersionsList.innerHTML += releaseCard;
             });
 
-            document.getElementById('totalDownloadCount').innerText = totalDownloadCount;
-        }
-
-        // =========================================================
-        // 언어 선택 및 WebSocket 연동 스크립트
-        // =========================================================
-        let ws;
-        let currentLanguage = localStorage.getItem('user_language') || "ko_KR"; // 로컬 저장소 또는 기본값
-
-        function connectWebSocket() {
-            const websocketPort = document.body.dataset.websocketPort || "8001"; // HTML data-websocket-port 속성에서 포트 가져오기, 기본값 8001
-            const ws_url = `ws://${location.hostname}:${websocketPort}`; 
-            ws = new WebSocket(ws_url);
-
-            ws.onopen = () => {
-                console.log("WebSocket connected.");
-                // 연결 시 PC 앱으로 현재 웹사이트 언어 설정 전송
-                if (currentLanguage) {
-                    ws.send(JSON.stringify({ type: "website_language_update", lang: currentLanguage }));
-                }
-            };
-
-            ws.onmessage = (event) => {
-                const message = JSON.parse(event.data);
-                if (message.type === "pc_language_update") {
-                    console.log("Language updated from PC:", message.lang);
-                    setLanguage(message.lang, true); // true for from_pc
-                }
-            };
-
-            ws.onclose = () => {
-                console.log("WebSocket disconnected. Retrying in 5 seconds...");
-                setTimeout(connectWebSocket, 5000);
-            };
-
-            ws.onerror = (error) => {
-                console.error("WebSocket error:", error);
-            };
-        }
-
-        function getTranslation(key, lang) {
-            // 해당 lang에 번역이 없으면 ko_KR (한국어)로 폴백, 그것도 없으면 key 자체를 반환
-            return translations[lang] && translations[lang][key] ? translations[lang][key] : (translations["ko_KR"] && translations["ko_KR"][key] ? translations["ko_KR"][key] : key);
-        }
-
-        function setLanguage(lang, from_pc = false) {
-            // 지원하지 않는 언어 코드인 경우 기본값인 ko_KR로 폴백
-            if (!translations[lang]) lang = "ko_KR"; 
-
-            // 현재 언어가 이미 적용된 언어와 같고, PC로부터의 업데이트가 아니며,
-            // 웹사이트의 언어 선택 드롭다운이 이미 해당 언어를 표시하고 있다면 불필요한 업데이트 방지
-            const langSelect = document.getElementById('langSelect');
-            let isSelectAlreadySet = langSelect && langSelect.value === lang;
-
-            if (currentLanguage === lang && !from_pc && isSelectAlreadySet) return; 
-
-            currentLanguage = lang;
-            localStorage.setItem('user_language', lang); // 사용자 선택 언어를 로컬 스토리지에 저장
-
-            // UI 텍스트 업데이트 (data-translate-key 속성을 가진 모든 요소)
-            document.querySelectorAll('[data-translate-key]').forEach(element => {
-                const key = element.getAttribute('data-translate-key');
-                if (key) {
-                    // 특정 태그(예: <p> 태그 내의 Strong)는 innerHTML로 처리하여 HTML 구조를 유지
-                    if (key.startsWith("about_p") || key.startsWith("donate_p1") || key.startsWith("install_step") || key.startsWith("manual_download_desc") || key.startsWith("manual_update_note") || key.startsWith("install_windows_p") || key.startsWith("install_mac_p1") || key.startsWith("install_mac_p2") || key.startsWith("install_mac_p3") || key.startsWith("install_mac_p4") || key.startsWith("install_linux_p1") || key.startsWith("install_linux_p2") || key.startsWith("install_linux_p3") || key.startsWith("install_source_p") || key.startsWith("install_python_install_p") || key.startsWith("install_git_clone_p") || key.startsWith("install_yolo_model_install_p") || key.startsWith("install_master_pw_p") || key.startsWith("install_settings_p") || key.startsWith("yolo_model_download_desc") || key.startsWith("download_pretrained_models_p") || key.startsWith("roboflow_intro_p1")) {
-                        element.innerHTML = getTranslation(key, currentLanguage);
-                    } else {
-                        element.textContent = getTranslation(key, currentLanguage);
-                    }
-                }
-            });
-
-            // Spacing for feature-card icons (스타일링 관련)
-            document.querySelectorAll('.feature-card .icon, .model-card .icon').forEach(icon => {
-                if (!icon.classList.contains('me-3')) icon.classList.add('mb-3');
-            });
-
-            // Update special cases (e.g., navigation links or specific elements without data-translate-key)
-            // (이미 data-translate-key를 적용했다면 아래 중복 코드 제거 가능)
-            // navigation links
-            document.querySelector('a[href="#about"]').textContent = getTranslation('nav_about', currentLanguage);
-            document.querySelector('a[href="#video"]').textContent = getTranslation('nav_video', currentLanguage);
-            document.querySelector('a[href="#features"]').textContent = getTranslation('nav_features', currentLanguage);
-            document.querySelector('a[href="#model-download"]').textContent = getTranslation('nav_model_download', currentLanguage);
-            document.querySelector('a[href="#install"]').textContent = getTranslation('nav_install', currentLanguage);
-            document.querySelector('a[href="#donate"]').textContent = getTranslation('nav_donate', currentLanguage);
-            document.querySelector('a[href="#contact"]').textContent = getTranslation('nav_contact', currentLanguage);
-
-            // Install section tabs
-            document.getElementById('windows-tab').querySelector('i').nextSibling.textContent = getTranslation('install_windows_btn', currentLanguage);
-            document.getElementById('mac-tab').querySelector('i').nextSibling.textContent = getTranslation('install_mac_btn', currentLanguage);
-            document.getElementById('linux-tab').querySelector('i').nextSibling.textContent = getTranslation('install_linux_btn', currentLanguage);
-            document.getElementById('source-tab').querySelector('i').nextSibling.textContent = getTranslation('install_source_btn', currentLanguage);
-
-
-            // Update button texts for download and specific sections
-            updateDownloadSection(); // GitHub API를 다시 호출하여 최신 릴리스 정보와 함께 텍스트 업데이트
-
-            // Model Download Section specific buttons
-            if (document.getElementById('ultralyticsWebsiteBtn')) document.getElementById('ultralyticsWebsiteBtn').textContent = getTranslation('ultralytics_website_btn', currentLanguage);
-            if (document.getElementById('roboflowExploreBtn')) document.getElementById('roboflowExploreBtn').textContent = getTranslation('roboflow_explore_btn', currentLanguage);
-            if (document.getElementById('roboflowCreateBtn')) document.getElementById('roboflowCreateBtn').textContent = getTranslation('roboflow_create_btn', currentLanguage);
-            
-            // Donate Section
-            if (document.getElementById('copyAccountBtn')) document.getElementById('copyAccountBtn').textContent = getTranslation('copy_account_btn', currentLanguage);
-
-            // Update the language selector to reflect the change
-            if (langSelect && langSelect.value !== lang) {
-                for (let i = 0; i < langSelect.options.length; i++) {
-                    if (langSelect.options[i].value === lang) {
-                        langSelect.selectedIndex = i;
-                        break;
-                    }
-                }
-            }
-
-            // Send language update to PC only if not initiated from PC
-            // PC로부터의 업데이트가 아니고, 웹소켓이 연결되어 있다면 PC로 변경사항 알림
-            if (!from_pc && ws && ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ type: "website_language_update", lang: lang }));
-            }
+            if (document.getElementById('totalDownloadCount')) document.getElementById('totalDownloadCount').innerText = totalDownloadCount;
         }
 
         // =========================================================
         // 페이지 로드 시 초기화 및 이벤트 리스너 설정
         // =========================================================
-        document.addEventListener('DOMContentLoaded', () => {
-            // 웹소켓 연결
-            connectWebSocket();
-
+        document.addEventListener('DOMContentLoaded', async () => {
             // 초기 언어 설정 (로컬 스토리지 또는 URL 파라미터, 없으면 기본값)
             const savedLang = localStorage.getItem('user_language');
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
 
             let initialLang = "ko_KR"; // Default
-            if (urlLang && translations[urlLang]) {
+            if (urlLang && ['ko_KR', 'en_US', 'de', 'ru', 'ja_JP', 'zh_CN'].includes(urlLang)) { // 지원 언어만 허용
                 initialLang = urlLang;
-            } else if (savedLang && translations[savedLang]) {
+            } else if (savedLang && ['ko_KR', 'en_US', 'de', 'ru', 'ja_JP', 'zh_CN'].includes(savedLang)) {
                 initialLang = savedLang;
             }
-            setLanguage(initialLang); // 초기 언어 적용
+            
+            // 초기 언어 파일을 먼저 로드
+            await loadLanguageFile(initialLang);
+
+            // 웹소켓 연결 (언어 파일 로드 후)
+            connectWebSocket();
+
+            await setLanguage(initialLang); // 초기 언어 적용 (UI 업데이트, 비동기이므로 await)
 
             // 언어 선택 드롭다운 이벤트 리스너
             const langSelect = document.getElementById('langSelect');
             if (langSelect) {
-                langSelect.addEventListener('change', (event) => {
-                    setLanguage(event.target.value);
+                langSelect.addEventListener('change', async (event) => { // async 추가
+                    await setLanguage(event.target.value); // await 추가
                 });
             }
 
@@ -968,17 +857,15 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                     try {
                         await navigator.clipboard.writeText(accountNumber);
                         const originalText = copyButton.textContent; // Original text for the button
-                        copyButton.textContent = getTranslation('copied_message', currentLanguage); // Temporarily change text
+                        copyButton.textContent = getTranslation('copied_message'); // Temporarily change text
                         setTimeout(() => { copyButton.textContent = originalText; }, 2000); // Revert after 2 seconds
                     } catch (err) {
                         console.error('Failed to copy text: ', err);
                         // 실패 시 알림 (이 키는 resources.js에 있음)
-                        alert(getTranslation('copied_message_error', currentLanguage)); 
+                        alert(getTranslation('copied_message_error')); 
                     }
                 });
             }
-            // 마지막으로 GitHub 다운로드 섹션 업데이트
-            updateDownloadSection();
         });
     </script>
 </body>
