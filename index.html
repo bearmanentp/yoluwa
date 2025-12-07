@@ -678,8 +678,9 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
         // =========================================================
         // GitHub API를 통한 다운로드 정보 및 이전 버전 로딩 (동적 콘텐츠)
         // =========================================================
+        // !!! 주인님: 이 부분에 GitHub 사용자 이름과 리포지토리 이름을 정확히 입력해주세요!
         const GITHUB_REPO_API_URL = "https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/releases";
-        // const GITHUB_TOKEN = "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN"; // 필요시 사용
+        // const GITHUB_TOKEN = "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN"; // 필요시 사용 (API 요청 제한 회피용)
         let totalDownloadCount = 0; // 전역으로 선언하여 다른 함수에서도 사용 가능하도록
 
         async function fetchGitHubReleases() {
@@ -721,6 +722,7 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                 document.getElementById('manualWindowsDownload').classList.add('disabled');
                 document.getElementById('manualWindowsDownload').textContent = getTranslation('no_downloads_available', currentLanguage);
                 // 나머지 수동 다운로드 버튼도 필요에 따라 disabled 처리
+                // 예: document.getElementById('manualMacDownload').classList.add('disabled');
 
                 return;
             } else {
@@ -871,7 +873,7 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                 const key = element.getAttribute('data-translate-key');
                 if (key) {
                     // 특정 태그(예: <p> 태그 내의 Strong)는 innerHTML로 처리하여 HTML 구조를 유지
-                    if (key.startsWith("about_p") || key.startsWith("donate_p1") || key.startsWith("install_step")) {
+                    if (key.startsWith("about_p") || key.startsWith("donate_p1") || key.startsWith("install_step") || key.startsWith("manual_download_desc") || key.startsWith("manual_update_note") || key.startsWith("install_windows_p") || key.startsWith("install_mac_p1") || key.startsWith("install_mac_p2") || key.startsWith("install_mac_p3") || key.startsWith("install_mac_p4") || key.startsWith("install_linux_p1") || key.startsWith("install_linux_p2") || key.startsWith("install_linux_p3") || key.startsWith("install_source_p") || key.startsWith("install_python_install_p") || key.startsWith("install_git_clone_p") || key.startsWith("install_yolo_model_install_p") || key.startsWith("install_master_pw_p") || key.startsWith("install_settings_p") || key.startsWith("yolo_model_download_desc") || key.startsWith("download_pretrained_models_p") || key.startsWith("roboflow_intro_p1")) {
                         element.innerHTML = getTranslation(key, currentLanguage);
                     } else {
                         element.textContent = getTranslation(key, currentLanguage);
@@ -886,6 +888,7 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
 
             // Update special cases (e.g., navigation links or specific elements without data-translate-key)
             // (이미 data-translate-key를 적용했다면 아래 중복 코드 제거 가능)
+            // navigation links
             document.querySelector('a[href="#about"]').textContent = getTranslation('nav_about', currentLanguage);
             document.querySelector('a[href="#video"]').textContent = getTranslation('nav_video', currentLanguage);
             document.querySelector('a[href="#features"]').textContent = getTranslation('nav_features', currentLanguage);
@@ -894,15 +897,22 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
             document.querySelector('a[href="#donate"]').textContent = getTranslation('nav_donate', currentLanguage);
             document.querySelector('a[href="#contact"]').textContent = getTranslation('nav_contact', currentLanguage);
 
-            // Update download buttons (e.g., install_windows_download_btn) with current release info
+            // Install section tabs
+            document.getElementById('windows-tab').querySelector('i').nextSibling.textContent = getTranslation('install_windows_btn', currentLanguage);
+            document.getElementById('mac-tab').querySelector('i').nextSibling.textContent = getTranslation('install_mac_btn', currentLanguage);
+            document.getElementById('linux-tab').querySelector('i').nextSibling.textContent = getTranslation('install_linux_btn', currentLanguage);
+            document.getElementById('source-tab').querySelector('i').nextSibling.textContent = getTranslation('install_source_btn', currentLanguage);
+
+
+            // Update button texts for download and specific sections
             updateDownloadSection(); // GitHub API를 다시 호출하여 최신 릴리스 정보와 함께 텍스트 업데이트
 
-            // Model Download Section
+            // Model Download Section specific buttons
             if (document.getElementById('ultralyticsWebsiteBtn')) document.getElementById('ultralyticsWebsiteBtn').textContent = getTranslation('ultralytics_website_btn', currentLanguage);
             if (document.getElementById('roboflowExploreBtn')) document.getElementById('roboflowExploreBtn').textContent = getTranslation('roboflow_explore_btn', currentLanguage);
             if (document.getElementById('roboflowCreateBtn')) document.getElementById('roboflowCreateBtn').textContent = getTranslation('roboflow_create_btn', currentLanguage);
-
-            // Donate Section - 계좌 정보는 번역되지 않으므로 버튼 텍스트만
+            
+            // Donate Section
             if (document.getElementById('copyAccountBtn')) document.getElementById('copyAccountBtn').textContent = getTranslation('copy_account_btn', currentLanguage);
 
             // Update the language selector to reflect the change
@@ -957,12 +967,13 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                     const accountNumber = document.getElementById('accountNumberValue').textContent.trim();
                     try {
                         await navigator.clipboard.writeText(accountNumber);
-                        const originalText = copyButton.textContent;
-                        copyButton.textContent = getTranslation('copied_message', currentLanguage);
-                        setTimeout(() => { copyButton.textContent = originalText; }, 2000);
+                        const originalText = copyButton.textContent; // Original text for the button
+                        copyButton.textContent = getTranslation('copied_message', currentLanguage); // Temporarily change text
+                        setTimeout(() => { copyButton.textContent = originalText; }, 2000); // Revert after 2 seconds
                     } catch (err) {
                         console.error('Failed to copy text: ', err);
-                        alert(getTranslation('copied_message_error', currentLanguage)); // 실패 시 알림
+                        // 실패 시 알림 (이 키는 resources.js에 있음)
+                        alert(getTranslation('copied_message_error', currentLanguage)); 
                     }
                 });
             }
