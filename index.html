@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoLuWa! - Your YOLO Live Web Analyzer</title>
+
+    <!-- Google Noto Sans KR 폰트 CDN (한글 깨짐 방지 및 가독성 향상) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Animate.css CDN (요소 등장/강조 애니메이션) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- AOS (Animate On Scroll) CSS CDN (스크롤 시 애니메이션) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* Custom Global Styles */
+        body { 
+            font-family: 'Noto Sans KR', sans-serif; /* 한글 폰트 적용 */
+            scroll-behavior: smooth; /* 부드러운 스크롤 */
+            background-color: #f8f9fa; /* 밝은 배경색 */
+        }
+        .navbar { 
+            background-color: #2c3e50 !important; /* 다크 블루 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand img { 
+            height: 40px; /* 로고 높이 */
+            margin-right: 10px; 
+        }
+        .navbar-nav .nav-link { 
+            color: white !important; 
+            margin: 0 15px; 
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+        .navbar-nav .nav-link:hover { 
+            color: #f39c12 !important; /* 오렌지 하이라이트 */
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background-color: #f39c12; /* 오렌지 색상 */
+            border-color: #e67e22;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e67e22;
+            border-color: #d35400;
+        }
+        .btn-secondary {
+            background-color: #34495e;
+            border-color: #2c3e50;
+        }
+        .btn-secondary:hover {
+            background-color: #2c3e50;
+            border-color: #1a242f;
+        }
+        h2, h3 { color: #2c3e50; font-weight: 700; margin-bottom: 30px; }
+        p { line-height: 1.8; color: #555; }
+        a { color: #3498db; text-decoration: none; }
+        a:hover { color: #2980b9; text-decoration: underline; }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(to right, #3498db, #8e44ad); /* 블루-퍼플 그라데이션 */
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* 자식 요소가 넘쳐도 숨김 */
+            min-height: 100vh; /* 최소 화면 높이 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            animation: backgroundPan 10s ease infinite alternate; /* 배경 움직임 애니메이션 */
+        }
+        @keyframes backgroundPan {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .hero-section h1 {
+            font-size: 4.5em; /* 제목 폰트 크기 */
+            font-weight: 900;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        .hero-section p.lead {
+            font-size: 1.7em;
+            margin-bottom: 40px;
+        }
+
+        /* YouTube Video Section */
+        .video-responsive {
+            overflow: hidden;
+            padding-bottom: 56.25%; /* 16:9 비율 (9/16 = 0.5625) */
+            position: relative;
+            height: 0;
+        }
+        .video-responsive iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            height: 100%; /* 모든 카드의 높이를 같게 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px); /* 호버 시 위로 살짝 이동 */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .feature-card .icon {
+            font-size: 3em;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: #2c3e50;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Installation Tabs */
+        .nav-tabs .nav-link {
+            color: #2c3e50;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 700;
+            padding: 15px 25px;
+            transition: all 0.3s ease;
+        }
+        .nav-tabs .nav-link.active {
+            color: #3498db;
+            border-color: #3498db;
+            background-color: #e9ecef;
+        }
+        .tab-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        code {
+            background-color: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 4px;
+            color: #c0392b;
+        }
+        pre code {
+            display: block;
+            padding: 15px;
+            background-color: #23272b; /* 다크 테마 코드 블록 */
+            color: #eee;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        footer .social-icons a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        footer .social-icons a:hover {
+            color: #3498db;
+        }
+    </style>
+    
+    <!-- Font Awesome CDN (아이콘 사용을 위함) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="#hero">
+                <img src="assets/logo.png" alt="YoLuWa! Logo" class="d-inline-block align-text-top">
+                YoLuWa!
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">소개</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#video">설명 영상</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">주요 기능</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#install">설치 & 다운로드</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">문의</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container animate__animated animate__fadeInUp">
+            <h1 class="display-1 fw-bold mb-4">YoLuWa!</h1>
+            <p class="lead mb-5">
+                강력한 YOLO 기반 실시간 웹캠 분석, <br>
+                간편한 원격 제어, 안전한 개인 정보 보호까지!
+            </p>
+            <div class="d-grid gap-3 d-md-block">
+                <a href="#video" class="btn btn-primary btn-lg px-5 me-md-3 animate__animated animate__pulse animate__infinite">설명 영상 보기</a>
+                <a href="#install" class="btn btn-secondary btn-lg px-5 animate__animated animate__bounceIn">지금 시작하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About YoLuWa! Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container py-5" data-aos="fade-up">
+            <h2 class="text-center mb-5">YoLuWa!는 무엇인가요?</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <p class="fs-5">
+                        YoLuWa!는 **Your YOLO Live Web Analyzer**의 약자로, 휴대폰 카메라를 활용하여 실시간으로 YOLO 기반 객체 인식을 수행하고, 이 결과를 웹 인터페이스를 통해 원격으로 제어하고 모니터링할 수 있는 혁신적인 파이썬 앱입니다. 사용자의 편의성, 강력한 기능, 그리고 견고한 보안을 최우선으로 설계되었습니다.
+                    </p>
+                    <p class="fs-5 mt-4">
+                        강력한 웹 기반 원격 제어 기능을 통해 PC에 직접 접근하지 않고도 카메라 스트림을 확인하고, YOLO 모델을 변경하며, 신뢰도 임계값을 조절하는 등 다양한 작업을 수행할 수 있습니다. 또한, 디스코드 웹훅 연동을 통해 분석 결과 이미지를 편리하게 공유할 수 있으며, 모든 설정은 마스터 비밀번호로 암호화되어 안전하게 보호됩니다.
+                    </p>
+                    <p class="fs-5 mt-4">
+                        게으른 로딩(Lazy Loading) 방식으로 YOLO 모델을 최적화하여 앱 시작 시 리소스 소모를 최소화하고, 필요한 시점에만 모델을 로드하여 쾌적한 사용 환경을 제공합니다. YoLuWa!는 AI 기반 비전 프로젝트를 더욱 쉽고 강력하게 만들어 줄 당신의 스마트 파트너가 될 것입니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Video Section -->
+    <section id="video" class="py-5">
+        <div class="container py-5" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="text-center mb-5">YoLuWa! 설명 영상</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="video-responsive">
+                        <!-- YouTube 영상 삽입 (주인님의 영상 링크로 교체해주세요!) -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1&showinfo=0&rel=0" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="text-center mt-4 text-muted">
+                        YoLuWa!의 주요 기능과 사용 방법을 영상으로 쉽게 확인해보세요!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="text-center mb-5" data-aos="fade-down">주요 기능</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="200">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-camera icon mb-3"></i>
+                        <h3>실시간 YOLO 분석</h3>
+                        <p>휴대폰 카메라를 웹캠으로 활용하여 실시간으로 YOLO 객체 인식을 수행하고, 분석 결과를 스트리밍합니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-globe icon mb-3"></i>
+                        <h3>직관적인 웹 제어</h3>
+                        <p>PC 앱에 직접 접근하지 않고도 휴대폰 웹 브라우저를 통해 모든 기능을 원격으로 제어할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="400">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-lock icon mb-3"></i>
+                        <h3>강력한 보안</h3>
+                        <p>마스터 비밀번호 설정 및 웹훅 URL 암호화로 앱과 데이터의 보안을 철저하게 지켜줍니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="500">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-layer-group icon mb-3"></i>
+                        <h3>동적 모델 관리</h3>
+                        <p>실시간으로 YOLO 모델을 변경하고 신뢰도 임계값을 조절하여 다양한 환경에 최적화할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-card text-center">
+                        <i class="fab fa-discord icon mb-3"></i>
+                        <h3>디스코드 연동</h3>
+                        <p>분석된 결과 이미지와 함께 원하는 메시지를 디스코드 채널로 즉시 전송할 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="700">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-tachometer-alt icon mb-3"></i>
+                        <h3>성능 최적화</h3>
+                        <p>게으른 로딩 방식으로 앱 시작 시 리소스 소모를 최소화하고 쾌적한 사용 환경을 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation & Download Section -->
+    <section id="install" class="py-5">
+        <div class="container py-5">
+            <h2 class="text-center mb-5" data-aos="fade-down">설치 및 다운로드</h2>
+            <div data-aos="fade-up" data-aos-delay="100">
+                <!-- Bootstrap Tabs for different versions/OS -->
+                <ul class="nav nav-tabs justify-content-center mb-4" id="installTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="windows-tab" data-bs-toggle="tab" data-bs-target="#windows" type="button" role="tab" aria-controls="windows" aria-selected="true">
+                            <i class="fab fa-windows me-2"></i>Windows
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="mac-tab" data-bs-toggle="tab" data-bs-target="#mac" type="button" role="tab" aria-controls="mac" aria-selected="false">
+                            <i class="fab fa-apple me-2"></i>macOS
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="linux-tab" data-bs-toggle="tab" data-bs-target="#linux" type="button" role="tab" aria-controls="linux" aria-selected="false">
+                            <i class="fab fa-linux me-2"></i>Linux
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab" aria-controls="source" aria-selected="false">
+                            <i class="fas fa-code me-2"></i>소스 코드
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="installTabsContent">
+                    <!-- Windows Installation Tab -->
+                    <div class="tab-pane fade show active" id="windows" role="tabpanel" aria-labelledby="windows-tab">
+                        <h3 class="mb-3 text-center">Windows용 YoLuWa! 설치 (추천)</h3>
+                        <p>Windows 사용자분들께서는 다음 단계를 따라 간편하게 YoLuWa!를 설치하고 실행할 수 있습니다.</p>
+                        <ol>
+                            <li><strong class="text-primary">최신 버전 다운로드:</strong> 아래 버튼을 클릭하여 YoLuWa! Windows 실행 파일을 다운로드합니다. (<code>.exe</code> 파일)</li>
+                            <li><strong class="text-primary">YOLO 모델 파일 준비:</strong> 사용하실 <code>.pt</code> 형식의 YOLO 모델 파일을 미리 준비해 둡니다. (예: <code>yolov8n.pt</code>)</li>
+                            <li><strong class="text-primary">IP WebCam 앱 설치:</strong> 휴대폰에 <a href="https://play.google.com/store/apps/details?id=com.pas.webcam" target="_blank">IP WebCam</a> (안드로이드) 또는 유사한 iOS 앱을 설치하고 실행하여 스트리밍 URL을 확인합니다.</li>
+                            <li><strong class="text-primary">YoLuWa! 실행:</strong> 다운로드한 <code>.exe</code> 파일을 실행하고, 안내에 따라 마스터 비밀번호를 설정합니다.</li>
+                            <li><strong class="text-primary">설정 입력:</strong> 앱 GUI의 설정 섹션에 휴대폰 웹캠 URL, 디스코드 웹훅 URL, 원하는 웹 스트리밍 포트 등을 입력하고 "설정 적용 및 저장" 버튼을 클릭합니다.</li>
+                            <li><strong class="text-primary">카메라 시작:</strong> "YOLO 카메라 시작/중지" 버튼을 눌러 분석을 시작합니다.</li>
+                        </ol>
+                        <div class="text-center mt-4">
+                            <a href="#download-links" class="btn btn-primary btn-lg"><i class="fas fa-download me-2"></i>Windows용 다운로드</a>
+                        </div>
+                    </div>
+                    <!-- macOS Installation Tab -->
+                    <div class="tab-pane fade" id="mac" role="tabpanel" aria-labelledby="mac-tab">
+                        <h3 class="mb-3 text-center">macOS용 YoLuWa! 설치 (Coming Soon)</h3>
+                        <p>macOS 버전은 현재 준비 중입니다. 조만간 편리한 설치 프로그램을 제공할 예정입니다.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle text-success me-2"></i><strong>PyInstaller</strong>를 이용한 앱 번들 제공 예정</li>
+                            <li><i class="fas fa-sync-alt text-info me-2"></i>최적화된 성능과 사용자 경험 제공</li>
+                        </ul>
+                        <p class="text-center mt-4">
+                            그동안 소스 코드를 통해 수동으로 설치하여 사용하실 수 있습니다.
+                        </p>
+                        <div class="text-center mt-4">
+                            <a href="#source" class="btn btn-outline-info btn-lg"><i class="fas fa-code me-2"></i>소스 코드 보기</a>
+                        </div>
+                    </div>
+                    <!-- Linux Installation Tab -->
+                    <div class="tab-pane fade" id="linux" role="tabpanel" aria-labelledby="linux-tab">
+                        <h3 class="mb-3 text-center">Linux용 YoLuWa! 설치 (Coming Soon)</h3>
+                        <p>Linux 버전은 현재 준비 중입니다. 다양한 배포판에서 안정적으로 동작하는 설치 패키지를 제공할 예정입니다.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle text-success me-2"></i><strong>AppImage</strong> 또는 <strong>Snap/Flatpak</strong> 패키지 제공 예정</li>
+                            <li><i class="fas fa-tools text-warning me-2"></i>커뮤니티와 협력하여 다양한 환경 지원</li>
+                        </ul>
+                        <p class="text-center mt-4">
+                            그동안 소스 코드를 통해 수동으로 설치하여 사용하실 수 있습니다.
+                        </p>
+                        <div class="text-center mt-4">
+                            <a href="#source" class="btn btn-outline-info btn-lg"><i class="fas fa-code me-2"></i>소스 코드 보기</a>
+                        </div>
+                    </div>
+                    <!-- Source Code Tab -->
+                    <div class="tab-pane fade" id="source" role="tabpanel" aria-labelledby="source-tab">
+                        <h3 class="mb-3 text-center">소스 코드로부터 설치 및 실행</h3>
+                        <p>개발자 또는 고급 사용자분들을 위한 소스 코드 설치 가이드입니다.</p>
+                        <ol>
+                            <li><strong class="text-primary">Python 설치:</strong> Python 3.8 이상 버전이 설치되어 있는지 확인합니다.</li>
+                            <li><strong class="text-primary">Git Clone 또는 다운로드:</strong> YoLuWa! GitHub 저장소에서 소스 코드를 다운로드합니다. (<code>https://github.com/YourUsername/YoLuWa</code>)</li>
+                            <li><strong class="text-primary">가상 환경 설정 (권장):</strong>
+<pre><code>python -m venv venv
+./venv/Scripts/activate # Windows
+source venv/bin/activate # macOS/Linux
+</code></pre>
+                            </li>
+                            <li><strong class="text-primary">필요 라이브러리 설치:</strong>
+<pre><code>pip install -r requirements.txt
+# 또는 다음 라이브러리들을 개별 설치
+pip install opencv-python ultralytics PySide6 requests cryptography
+</code></pre>
+                            </li>
+                            <li><strong class="text-primary">YOLO 모델 파일 준비:</strong> <code>.pt</code> 형식의 YOLO 모델 파일과 <code>templates</code> 폴더 안의 <code>index.html</code> 파일을 <code>yoluwaPC.py</code>와 같은 디렉토리에 둡니다.</li>
+                            <li><strong class="text-primary">YoLuWa! 실행:</strong>
+<pre><code>python yoluwaPC.py
+</code></pre>
+                            </li>
+                            <li><strong class="text-primary">최초 설정:</strong> 프로그램 최초 실행 시 마스터 비밀번호를 설정합니다.</li>
+                            <li><strong class="text-primary">설정 입력:</strong> 앱 GUI에서 필요한 설정값(웹캠 URL, 디스코드 웹훅 등)을 입력하고 저장합니다.</li>
+                        </ol>
+                        <div class="text-center mt-4">
+                            <a href="https://github.com/YourUsername/YoLuWa" target="_blank" class="btn btn-info btn-lg"><i class="fab fa-github me-2"></i>GitHub 저장소로 이동</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="download-links" class="text-center mt-5" data-aos="fade-up" data-aos-delay="200">
+                <h3>직접 다운로드 링크</h3>
+                <p>각 플랫폼에 맞는 최신 버전을 다운로드하세요.</p>
+                <a href="path/to/yoluwa_windows_v1.0.0.exe" download class="btn btn-outline-primary btn-lg mt-3 me-3"><i class="fab fa-windows me-2"></i>Windows (.exe)</a>
+                <a href="path/to/yoluwa_mac_v1.0.0.zip" download class="btn btn-outline-secondary btn-lg mt-3 me-3"><i class="fab fa-apple me-2"></i>macOS (.zip)</a>
+                <a href="path/to/yoluwa_linux_v1.0.0.AppImage" download class="btn btn-outline-success btn-lg mt-3 me-3"><i class="fab fa-linux me-2"></i>Linux (.AppImage)</a>
+                <a href="https://github.com/YourUsername/YoLuWa/archive/refs/heads/main.zip" target="_blank" class="btn btn-outline-info btn-lg mt-3"><i class="fas fa-code me-2"></i>소스 코드 (.zip)</a>
+                <p class="text-muted mt-3">
+                    <small>다운로드 링크는 실제 파일 경로로 교체해주세요.</small>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in">
+            <h2>지금 바로 YoLuWa!를 경험해보세요!</h2>
+            <p class="lead">당신의 비전 AI 프로젝트에 새로운 차원의 편리함과 보안을 더합니다.</p>
+            <a href="#install" class="btn btn-primary btn-lg mt-4 animate__animated animate__headShake animate__infinite">YoLuWa! 다운로드</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p>&copy; 2025 YoLuWa!. All Rights Reserved.</p>
+                    <p>문의: <a href="mailto:your.email@example.com" class="text-white-50">your.email@example.com</a></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- AOS (Animate On Scroll) JavaScript CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS 초기화
+        AOS.init({
+            duration: 1000, /* 애니메이션 지속 시간 (밀리초) */
+            once: true,    /* 애니메이션 한 번만 실행 (스크롤 시) */
+        });
+
+        // 부드러운 스크롤 (Optional: Bootstrap 스크롤스파이와 충돌 가능성 있음)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar 스크롤 시 배경색 변경 (Optional)
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled'); // 스크롤 시 적용할 클래스
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
