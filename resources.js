@@ -737,13 +737,25 @@ const translations = {
         "account_number": "账号：",
         "account_number_value": "7777-03-5969570",
         "account_holder": "户主：",
-        "account_holder_value": "석*宇",
+        "account_holder_value": "石*宇",
         "copy_account_btn": "复制账号",
         "copied_message": "账号已复制！",
         "mobile_download_note": "此页面已针对移动设备优化。",
-        "no_downloads_available": "没有可用的下载文件。"
+        "no_downloads_available": "没有可用的下载文件。",
+        "copied_message_error": "계좌번호 복사에 실패했습니다!"
     }
 };
+
+// ... (Rest of the WebSocket and language related JS) ...
+
+// JavaScript에서 사용할 유틸리티 함수 (translations 객체에 포함)
+function getTranslation(key, lang) {
+    return translations[lang] && translations[lang][key] ? translations[lang][key] : (translations["ko_KR"] && translations["ko_KR"][key] ? translations["ko_KR"][key] : key);
+}
+
+// 이 아래는 이전과 동일한 JavaScript 코드이므로 생략했습니다.
+// 전체 코드는 이전에 드렸던 `index.html` 완성본과 `resources.js`의 나머지 부분에서 확인하실 수 있습니다.
+// ...
 
 // WebSocket connection for real-time language updates
 let ws;
@@ -780,11 +792,6 @@ function connectWebSocket() {
     };
 }
 
-function getTranslation(key, lang) {
-    // 해당 lang에 번역이 없으면 ko_KR (한국어)로 폴백, 그것도 없으면 key 자체를 반환
-    return translations[lang] && translations[lang][key] ? translations[lang][key] : (translations["ko_KR"] && translations["ko_KR"][key] ? translations["ko_KR"][key] : key);
-}
-
 function setLanguage(lang, from_pc = false) {
     // 지원하지 않는 언어 코드인 경우 기본값인 ko_KR로 폴백
     if (!translations[lang]) lang = "ko_KR"; 
@@ -804,10 +811,14 @@ function setLanguage(lang, from_pc = false) {
         const key = element.getAttribute('data-translate-key');
         if (key) {
             // 특정 태그(예: <p> 태그 내의 Strong)는 innerHTML로 처리하여 HTML 구조를 유지
-            if (key.startsWith("about_p") || key.startsWith("donate_p1") || key.startsWith("install_step") || key.startsWith("manual_download_desc") || key.startsWith("manual_update_note")) {
-                element.innerHTML = getTranslation(key, currentLanguage);
+            // 주의: 이 부분을 HTML 구조에 맞게 세밀하게 조정해야 합니다.
+            // 번역 데이터에 HTML 태그가 포함될 수 있다면 innerHTML을 사용하고, 그렇지 않다면 textContent를 사용하세요.
+            const translatedText = getTranslation(key, currentLanguage);
+            if (element.tagName === 'P' || element.tagName === 'SPAN' || element.tagName === 'A' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'STRONG' || element.tagName === 'EM' || element.tagName === 'SMALL' || element.tagName === 'LI') {
+                 // 여기서는 innerHTML을 사용하여 Bold 태그 등을 유지하도록 합니다.
+                element.innerHTML = translatedText;
             } else {
-                element.textContent = getTranslation(key, currentLanguage);
+                element.textContent = translatedText;
             }
         }
     });
@@ -818,26 +829,17 @@ function setLanguage(lang, from_pc = false) {
     });
 
     // Update special cases (e.g., navigation links or specific elements without data-translate-key)
-    // (이미 data-translate-key를 적용했다면 아래 중복 코드 제거 가능)
-    // navigation links
-    document.querySelector('a[href="#about"]').textContent = getTranslation('nav_about', currentLanguage);
-    document.querySelector('a[href="#video"]').textContent = getTranslation('nav_video', currentLanguage);
-    document.querySelector('a[href="#features"]').textContent = getTranslation('nav_features', currentLanguage);
-    document.querySelector('a[href="#model-download"]').textContent = getTranslation('nav_model_download', currentLanguage);
-    document.querySelector('a[href="#install"]').textContent = getTranslation('nav_install', currentLanguage);
-    document.querySelector('a[href="#donate"]').textContent = getTranslation('nav_donate', currentLanguage);
-    document.querySelector('a[href="#contact"]').textContent = getTranslation('nav_contact', currentLanguage);
-
-    // Install section tabs
-    document.getElementById('windows-tab').querySelector('span') && (document.getElementById('windows-tab').querySelector('span').textContent = getTranslation('install_windows_btn', currentLanguage));
-    document.getElementById('mac-tab').querySelector('span') && (document.getElementById('mac-tab').querySelector('span').textContent = getTranslation('install_mac_btn', currentLanguage));
-    document.getElementById('linux-tab').querySelector('span') && (document.getElementById('linux-tab').querySelector('span').textContent = getTranslation('install_linux_btn', currentLanguage));
-    document.getElementById('source-tab').querySelector('span') && (document.getElementById('source-tab').querySelector('span').textContent = getTranslation('install_source_btn', currentLanguage));
-
-
-    // Update button texts for download and specific sections
-    updateDownloadSection(); // GitHub API를 다시 호출하여 최신 릴리스 정보와 함께 텍스트 업데이트
-
+    // 네비게이션 링크는 data-translate-key 속성만 있으면 자동으로 업데이트됩니다.
+    // 탭 버튼 등은 직접 접근해서 업데이트가 필요합니다.
+    const installTabs = document.getElementById('installTabs');
+    if (installTabs) {
+        // 탭 버튼 텍스트 업데이트 (아이콘 뒤의 텍스트를 찾아 업데이트)
+        document.getElementById('windows-tab').querySelector('i').nextSibling.textContent = getTranslation('install_windows_btn', currentLanguage);
+        document.getElementById('mac-tab').querySelector('i').nextSibling.textContent = getTranslation('install_mac_btn', currentLanguage);
+        document.getElementById('linux-tab').querySelector('i').nextSibling.textContent = getTranslation('install_linux_btn', currentLanguage);
+        document.getElementById('source-tab').querySelector('i').nextSibling.textContent = getTranslation('install_source_btn', currentLanguage);
+    }
+    
     // Model Download Section specific buttons
     if (document.getElementById('ultralyticsWebsiteBtn')) document.getElementById('ultralyticsWebsiteBtn').textContent = getTranslation('ultralytics_website_btn', currentLanguage);
     if (document.getElementById('roboflowExploreBtn')) document.getElementById('roboflowExploreBtn').textContent = getTranslation('roboflow_explore_btn', currentLanguage);
@@ -856,6 +858,11 @@ function setLanguage(lang, from_pc = false) {
         }
     }
 
+    // GitHub 다운로드 섹션의 번역된 텍스트를 업데이트하기 위해 다시 호출
+    // 이 함수 내부에서 `currentLanguage`를 사용하여 텍스트를 가져오기 때문에 업데이트 필요.
+    updateDownloadSection();
+
+
     // Send language update to PC only if not initiated from PC
     // PC로부터의 업데이트가 아니고, 웹소켓이 연결되어 있다면 PC로 변경사항 알림
     if (!from_pc && ws && ws.readyState === WebSocket.OPEN) {
@@ -863,7 +870,9 @@ function setLanguage(lang, from_pc = false) {
     }
 }
 
-// Initial language setup for elements with data-translate-key attribute
+// =========================================================
+// 페이지 로드 시 초기화 및 이벤트 리스너 설정
+// =========================================================
 document.addEventListener('DOMContentLoaded', () => {
     // 웹소켓 연결
     connectWebSocket();
@@ -901,7 +910,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => { copyButton.textContent = originalText; }, 2000); // Revert after 2 seconds
             } catch (err) {
                 console.error('Failed to copy text: ', err);
-                alert(getTranslation('copied_message_error', currentLanguage)); // 실패 시 알림 (이 키는 resources.js에 없음. 필요하면 추가)
+                // 실패 시 알림 (이 키는 resources.js에 있음)
+                alert(getTranslation('copied_message_error', currentLanguage)); 
             }
         });
     }
