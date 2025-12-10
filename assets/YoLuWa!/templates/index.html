@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YOLO Remote Control</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {{ 
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+                margin: 0; padding: 15px; 
+                background-color: #eef1f5; 
+                color: #333;
+            }}
+            h1 {{ 
+                color: #2c3e50; 
+                text-align: center; 
+                margin-bottom: 25px; 
+                font-size: 1.8em;
+            }}
+            .video-container {{ 
+                text-align: center; 
+                margin: 0 auto 20px auto; 
+                max-width: 90%;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                overflow: hidden;
+            }}
+            img {{ 
+                width: 100%; 
+                height: auto; 
+                display: block; 
+                border-bottom: 1px solid #eee;
+            }}
+            .current-model {{
+                padding: 10px;
+                font-size: 1.1em;
+                font-weight: bold;
+                color: #34495e;
+                background-color: #f8f9fa;
+            }}
+            .current-confidence {{ 
+                padding: 10px;
+                font-size: 1.0em;
+                color: #555;
+                background-color: #e2e6ea;
+            }}
+            .controls {{ 
+                text-align: center; 
+                margin-top: 20px; 
+                max-width: 90%; 
+                margin-left: auto; 
+                margin-right: auto;
+            }}
+            .control-button, .select-model, .discord-input, .confidence-input-group {{ 
+                display: block; 
+                width: 100%; 
+                padding: 12px 0; 
+                font-size: 1.2em; 
+                margin: 10px 0; 
+                cursor: pointer; 
+                border: none; 
+                border-radius: 6px; 
+                color: white; 
+                font-weight: bold;
+                transition: background-color 0.2s ease;
+                box-sizing: border-box; 
+            }}
+            .select-model {{
+                background-color: #6c757d; 
+                appearance: none; 
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                padding: 10px 15px; 
+                font-size: 1.1em;
+                color: #fff;
+            }}
+            .select-model:hover {{
+                background-color: #5a6268;
+            }}
+            .discord-input {{
+                border: 1px solid #ccc;
+                color: #333;
+                background-color: #fff;
+                font-size: 1.2em;
+                height: auto; 
+                min-height: 44px; 
+            }}
+            .confidence-input-group {{
+                background-color: #17a2b8; 
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+                color: white;
+            }}
+            .confidence-input-group label {{
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }}
+            .confidence-input-group input[type="number"] {{
+                width: calc(100% - 22px); 
+                padding: 8px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                font-size: 1em;
+                color: #333;
+                box-sizing: border-box;
+                margin-bottom: 5px;
+            }}
+            .confidence-input-group button {{
+                width: 100%;
+                background-color: #007bff; 
+                color: white;
+                padding: 8px;
+                border: none;
+                border-radius: 4px;
+                font-size: 1em;
+                cursor: pointer;
+            }}
+            .confidence-input-group button:hover {{
+                background-color: #0056b3;
+            }}
+
+            .capture-button {{ background-color: #28a745; }} 
+            .capture-button:hover {{ background-color: #218838; }}
+            .discord-button {{ background-color: #7289DA; }} 
+            .discord-button:hover {{ background-color: #677bc4; }}
+            .rotate-button {{ background-color: #ffc107; color: #333; }} 
+            .rotate-button:hover {{ background-color: #e0a800; }}
+            .stop-button {{ background-color: #dc3545; }} 
+            .stop-button:hover {{ background-color: #c82333; }}
+            .status-message {{ 
+                margin-top: 20px; 
+                font-weight: bold; 
+                color: #555; 
+                text-align: center; 
+                font-size: 1em;
+                min-height: 20px; 
+            }}
+            @media (min-width: 768px) {{ 
+                .controls {{ max-width: 600px; }}
+                .control-button, .select-model, .discord-input, .confidence-input-group {{ 
+                    display: inline-block; 
+                    width: 48%; 
+                    margin: 5px 1%;
+                }}
+                .select-model, .discord-input {{ width: 98%; }} 
+                .stop-button, .rotate-button {{ width: 98%; }}
+                .video-container {{ max-width: 640px; }}
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>YOLO 분석 원격 제어</h1>
+        <div class="video-container">
+            <img src="/video_feed" alt="YOLO Live Stream">
+            <div class="current-model">현재 모델: {current_yolo_model_name}</div>
+            <div class="current-confidence">신뢰도 임계값: {confidence_threshold}</div>
+        </div>
+        <div class="controls">
+            <select class="select-model" onchange="selectModel(this.value)">
+                <option value="">-- YOLO 모델 선택 --</option>
+                {model_options}
+            </select>
+
+            <div class="confidence-input-group">
+                <label for="confidenceThreshold">신뢰도 임계값 (0.00-1.00):</label>
+                <input type="number" id="confidenceThreshold" min="0.00" max="1.00" step="0.01" value="{confidence_threshold}">
+                <button onclick="setConfidence()">적용</button>
+            </div>
+
+            <textarea id="discordMessage" class="discord-input" placeholder="디스코드 메시지 (선택 사항)" rows="2"></textarea>
+            <button class="control-button capture-button" onclick="sendCommand('CAPTURE')">사진 캡처</button>
+            <button class="control-button discord-button" onclick="sendCommand('DISCORD', document.getElementById('discordMessage').value)">디스코드 전송</button>
+            <button class="control-button rotate-button" onclick="sendCommand('ROTATE_CAMERA')">카메라 회전</button>
+            <button class="control-button stop-button" onclick="sendCommand('STOP_PROGRAM')">프로그램 중단</button>
+        </div>
+        <p class="status-message" id="status"></p>
+
+        <script>
+            let currentRotationAngle = 0; // 현재 회전 각도 상태 (0, 90, 180, 270)
+
+            function sendCommand(command, message = '') {{
+                const statusElement = document.getElementById('status');
+                statusElement.innerText = `Sending '${{command}}' command...`;
+                let path = '';
+                
+                if (command === 'STOP_PROGRAM') {{
+                    if (!confirm('정말로 프로그램을 중단하시겠습니까? 이 동작은 되돌릴 수 없습니다!')) {{
+                        statusElement.innerText = '프로그램 중단 취소.';
+                        return;
+                    }}
+                    path = '/trigger_stop_program';
+                }} else if (command === 'DISCORD') {{
+                    path = '/trigger_discord?message=' + encodeURIComponent(message);
+                }} else if (command === 'ROTATE_CAMERA') {{
+                    currentRotationAngle = (currentRotationAngle + 90) % 360; 
+                    path = '/trigger_rotate_camera?angle=' + currentRotationAngle;
+                    statusElement.innerText = `Camera rotation: ${{currentRotationAngle}} degrees`;
+                }} else {{ 
+                    path = '/trigger_' + command.toLowerCase();
+                }}
+                
+                fetch(path)
+                    .then(response => response.text())
+                    .then(data => {{
+                        statusElement.innerText = `Command '${{command}}' response: ${{data}}`;
+                        if (command === 'STOP_PROGRAM') {{
+                            alert('프로그램이 중단되었습니다.');
+                            window.close(); 
+                        }} else {{
+                            setTimeout(() => statusElement.innerText = '', 3000); 
+                        }}
+                    }})
+                    .catch(error => {{
+                        statusElement.innerText = `Error sending '${{command}}' command: ${{error}}`;
+                        console.error('Error:', error);
+                    }});
+            }}
+
+            function selectModel(modelPath) {{
+                if (!modelPath) return;
+                const statusElement = document.getElementById('status');
+                statusElement.innerText = `Selecting model: ${{modelPath.split('\\\\').pop().split('/').pop()}}...`;
+                fetch('/trigger_select_model?path=' + encodeURIComponent(modelPath))
+                    .then(response => response.text())
+                    .then(data => {{
+                        statusElement.innerText = `Model selected: ${{data}}`;
+                        setTimeout(() => window.location.reload(), 1000); 
+                    }})
+                    .catch(error => {{
+                        statusElement.innerText = `Error selecting model: ${{error}}`;
+                        console.error('Error:', error);
+                    }});
+            }}
+
+            function setConfidence() {{
+                const statusElement = document.getElementById('status');
+                const confidenceInput = document.getElementById('confidenceThreshold');
+                const value = parseFloat(confidenceInput.value);
+
+                if (isNaN(value) || value < 0.00 || value > 1.00) {{
+                    statusElement.innerText = 'Error: Confidence must be between 0.00 and 1.00.';
+                    return;
+                }}
+
+                statusElement.innerText = `Setting confidence to ${{value.toFixed(2)}}...`;
+                fetch('/trigger_set_confidence?value=' + value.toFixed(2))
+                    .then(response => response.text())
+                    .then(data => {{
+                        statusElement.innerText = `Confidence set: ${{data}}`;
+                        setTimeout(() => window.location.reload(), 1000); 
+                    }})
+                    .catch(error => {{
+                        statusElement.innerText = `Error setting confidence: ${{error}}`;
+                        console.error('Error:', error);
+                    }});
+            }}
+        </script>
+    </body>
+</html>
