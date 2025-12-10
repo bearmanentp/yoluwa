@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YoLuWa! - Your YOLO Live Web Analyzer</title>
 
-    <!-- Google Noto Sans KR 폰트 CDN -->
+    <!-- Google Noto Sans KR 폰트 CDN (한글 깨짐 방지 및 가독성 향상) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
@@ -13,54 +13,39 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     
-    <!-- Animate.css CDN -->
+    <!-- Animate.css CDN (요소 등장/강조 애니메이션) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
-    <!-- AOS (Animate On Scroll) CSS CDN -->
+    <!-- AOS (Animate On Scroll) CSS CDN (스크롤 시 애니메이션) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* Custom Global Styles */
         body { 
-            font-family: 'Noto Sans KR', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f8f9fa;
+            font-family: 'Noto Sans KR', sans-serif; /* 한글 폰트 적용 */
+            scroll-behavior: smooth; /* 부드러운 스크롤 */
+            background-color: #f8f9fa; /* 밝은 배경색 */
         }
         .navbar { 
-            background-color: #2c3e50 !important;
+            background-color: #2c3e50 !important; /* 다크 블루 */
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .navbar-brand img { 
-            height: 40px;
+            height: 40px; /* 로고 높이 */
             margin-right: 10px; 
         }
         .navbar-nav .nav-link { 
-            color: white !important;
-            margin: 0 15px;
+            color: white !important; 
+            margin: 0 15px; 
             font-weight: 500;
             transition: color 0.3s ease, transform 0.2s ease;
         }
         .navbar-nav .nav-link:hover { 
-            color: #f39c12 !important;
+            color: #f39c12 !important; /* 오렌지 하이라이트 */
             transform: translateY(-2px);
         }
-        .lang-select-wrapper {
-            margin-left: 20px;
-        }
-        .lang-select-wrapper select {
-            background-color: #34495e;
-            color: white;
-            border: 1px solid #4a667d;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .lang-select-wrapper select:focus {
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-        }
         .btn-primary {
-            background-color: #f39c12;
+            background-color: #f39c12; /* 오렌지 색상 */
             border-color: #e67e22;
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
@@ -83,25 +68,25 @@
 
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(to right, #3498db, #8e44ad);
+            background: linear-gradient(to right, #3498db, #8e44ad); /* 블루-퍼플 그라데이션 */
             color: white;
             padding: 120px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
-            min-height: 100vh;
+            overflow: hidden; 
+            min-height: 100vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            animation: backgroundPan 10s ease infinite alternate;
+            animation: backgroundPan 10s ease infinite alternate; /* 배경 움직임 애니메이션 */
         }
         @keyframes backgroundPan {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
         .hero-section h1 {
-            font-size: 4.5em;
+            font-size: 4.5em; 
             font-weight: 900;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
         }
@@ -120,7 +105,7 @@
         /* YouTube Video Section */
         .video-responsive {
             overflow: hidden;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; 
             position: relative;
             height: 0;
         }
@@ -141,34 +126,17 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             padding: 30px;
-            height: 100%;
+            height: 100%; 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px); 
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         .feature-card .icon {
             font-size: 3em;
             color: #3498db;
             margin-bottom: 20px;
-        }
-
-        /* Model Download Section */
-        .model-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 30px;
-            height: 100%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .model-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        .model-card .btn {
-            margin-top: 15px;
         }
 
         /* Call to Action */
@@ -208,7 +176,7 @@
         pre code {
             display: block;
             padding: 15px;
-            background-color: #23272b;
+            background-color: #23272b; 
             color: #eee;
             border-radius: 8px;
             overflow-x: auto;
@@ -237,30 +205,6 @@
             margin-right: 5px;
         }
 
-        /* Donate Section */
-        .donate-section .account-info {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-        .donate-section .account-info p {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-        .donate-section .copy-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .donate-section .copy-btn:hover {
-            background-color: #218838;
-        }
-
         /* Footer */
         footer {
             background-color: #2c3e50;
@@ -280,10 +224,10 @@
         }
     </style>
     
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome CDN (아이콘 사용을 위함) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body data-websocket-port="{websocket_port}"> <!-- WebSocket 포트를 body의 data 속성으로 전달 -->
+<body>
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -298,37 +242,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#about" data-translate-key="nav_about">소개</a>
+                        <a class="nav-link" href="#about">소개</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#video" data-translate-key="nav_video">설명 영상</a>
+                        <a class="nav-link" href="#video">설명 영상</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features" data-translate-key="nav_features">주요 기능</a>
+                        <a class="nav-link" href="#features">주요 기능</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#model-download" data-translate-key="nav_model_download">모델 다운로드</a>
+                        <a class="nav-link" href="#install">설치 & 다운로드</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#install" data-translate-key="nav_install">설치 & 다운로드</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#donate" data-translate-key="nav_donate">후원</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact" data-translate-key="nav_contact">문의</a>
+                        <a class="nav-link" href="#contact">문의</a>
                     </li>
                 </ul>
-                <div class="lang-select-wrapper ms-lg-3">
-                    <select id="langSelect" class="form-select">
-                        <option value="ko_KR">한국어</option>
-                        <option value="en_US">English</option>
-                        <option value="de">Deutsch</option>
-                        <option value="ru">Русский</option>
-                        <option value="ja_JP">日本語</option>
-                        <option value="zh_CN">简体中文</option>
-                    </select>
-                </div>
             </div>
         </div>
     </nav>
@@ -336,17 +264,17 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="container animate__animated animate__fadeInUp">
-            <h1 class="display-1 fw-bold mb-4" data-translate-key="hero_title">YoLuWa!</h1>
+            <h1 class="display-1 fw-bold mb-4">YoLuWa!</h1>
             <p class="lead mb-5">
-                <span data-translate-key="hero_slogan_part1">강력한 YOLO 기반 실시간 웹캠 분석,</span> <br>
-                <span data-translate-key="hero_slogan_part2">간편한 원격 제어, 안전한 개인 정보 보호까지!</span>
+                강력한 YOLO 기반 실시간 웹캠 분석, <br>
+                간편한 원격 제어, 안전한 개인 정보 보호까지!
             </p>
             <div class="d-grid gap-3 d-md-block">
-                <a href="#video" class="btn btn-primary btn-lg px-5 me-md-3 animate__animated animate__pulse animate__infinite" data-translate-key="hero_watch_video">설명 영상 보기</a>
-                <a href="#install" class="btn btn-secondary btn-lg px-5 animate__animated animate__bounceIn" data-translate-key="hero_get_started">지금 시작하기</a>
+                <a href="#video" class="btn btn-primary btn-lg px-5 me-md-3 animate__animated animate__pulse animate__infinite">설명 영상 보기</a>
+                <a href="#install" class="btn btn-secondary btn-lg px-5 animate__animated animate__bounceIn">지금 시작하기</a>
             </div>
             <div class="download-stats animate__animated animate__fadeInUp mt-4" data-aos="fade-up" data-aos-delay="200">
-                <span id="totalDownloadCountLabel" data-translate-key="total_downloads">총 다운로드 수:</span> <span id="totalDownloadCount">로딩 중...</span>
+                총 다운로드 수: <span id="totalDownloadCount">로딩 중...</span>
             </div>
         </div>
     </section>
@@ -354,16 +282,16 @@
     <!-- About YoLuWa! Section -->
     <section id="about" class="py-5 bg-light">
         <div class="container py-5" data-aos="fade-up">
-            <h2 class="text-center mb-5" data-translate-key="about_title">YoLuWa!는 무엇인가요?</h2>
+            <h2 class="text-center mb-5">YoLuWa!는 무엇인가요?</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <p class="fs-5" data-translate-key="about_p1">
+                    <p class="fs-5">
                         YoLuWa!는 **Your YOLO Live Web Analyzer**의 약자로, 휴대폰 카메라를 활용하여 실시간으로 YOLO 기반 객체 인식을 수행하고, 이 결과를 웹 인터페이스를 통해 원격으로 제어하고 모니터링할 수 있는 혁신적인 파이썬 앱입니다. 사용자의 편의성, 강력한 기능, 그리고 견고한 보안을 최우선으로 설계되었습니다.
                     </p>
-                    <p class="fs-5 mt-4" data-translate-key="about_p2">
+                    <p class="fs-5 mt-4">
                         강력한 웹 기반 원격 제어 기능을 통해 PC에 직접 접근하지 않고도 카메라 스트림을 확인하고, YOLO 모델을 변경하며, 신뢰도 임계값을 조절하는 등 다양한 작업을 수행할 수 있습니다. 또한, 디스코드 웹훅 연동을 통해 분석 결과 이미지를 편리하게 공유할 수 있으며, 모든 설정은 마스터 비밀번호로 암호화되어 안전하게 보호됩니다.
                     </p>
-                    <p class="fs-5 mt-4" data-translate-key="about_p3">
+                    <p class="fs-5 mt-4">
                         게으른 로딩(Lazy Loading) 방식으로 YOLO 모델을 최적화하여 앱 시작 시 리소스 소모를 최소화하고, 필요한 시점에만 모델을 로드하여 쾌적한 사용 환경을 제공합니다. YoLuWa!는 AI 기반 비전 프로젝트를 더욱 쉽고 강력하게 만들어 줄 당신의 스마트 파트너가 될 것입니다.
                     </p>
                 </div>
@@ -374,7 +302,7 @@
     <!-- YouTube Video Section -->
     <section id="video" class="py-5">
         <div class="container py-5" data-aos="fade-up" data-aos-delay="100">
-            <h2 class="text-center mb-5" data-translate-key="video_title">YoLuWa! 설명 영상</h2>
+            <h2 class="text-center mb-5">YoLuWa! 설명 영상</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="video-responsive">
@@ -386,7 +314,7 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <p class="text-center mt-4 text-muted" data-translate-key="video_desc">
+                    <p class="text-center mt-4 text-muted">
                         YoLuWa!의 주요 기능과 사용 방법을 영상으로 쉽게 확인해보세요!
                     </p>
                 </div>
@@ -397,77 +325,48 @@
     <!-- Features Section -->
     <section id="features" class="py-5 bg-light">
         <div class="container py-5">
-            <h2 class="text-center mb-5" data-aos="fade-down" data-translate-key="features_title">주요 기능</h2>
+            <h2 class="text-center mb-5" data-aos="fade-down">주요 기능</h2>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="200">
                     <div class="feature-card text-center">
                         <i class="fas fa-camera icon mb-3"></i>
-                        <h3 data-translate-key="feature_realtime_yolo_h">실시간 YOLO 분석</h3>
-                        <p data-translate-key="feature_realtime_yolo_p">휴대폰 카메라를 웹캠으로 활용하여 실시간으로 YOLO 객체 인식을 수행하고, 분석 결과를 스트리밍합니다.</p>
+                        <h3>실시간 YOLO 분석</h3>
+                        <p>휴대폰 카메라를 웹캠으로 활용하여 실시간으로 YOLO 객체 인식을 수행하고, 분석 결과를 스트리밍합니다.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="feature-card text-center">
                         <i class="fas fa-globe icon mb-3"></i>
-                        <h3 data-translate-key="feature_intuitive_web_h">직관적인 웹 제어</h3>
-                        <p data-translate-key="feature_intuitive_web_p">PC 앱에 직접 접근하지 않고도 휴대폰 웹 브라우저를 통해 모든 기능을 원격으로 제어할 수 있습니다.</p>
+                        <h3>직관적인 웹 제어</h3>
+                        <p>PC 앱에 직접 접근하지 않고도 휴대폰 웹 브라우저를 통해 모든 기능을 원격으로 제어할 수 있습니다.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="400">
                     <div class="feature-card text-center">
                         <i class="fas fa-lock icon mb-3"></i>
-                        <h3 data-translate-key="feature_strong_security_h">강력한 보안</h3>
-                        <p data-translate-key="feature_strong_security_p">마스터 비밀번호 설정 및 웹훅 URL 암호화로 앱과 데이터의 보안을 철저하게 지켜줍니다.</p>
+                        <h3>강력한 보안</h3>
+                        <p>마스터 비밀번호 설정 및 웹훅 URL 암호화로 앱과 데이터의 보안을 철저하게 지켜줍니다.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4" data-aos="fade-right" data-aos-delay="500">
                     <div class="feature-card text-center">
                         <i class="fas fa-layer-group icon mb-3"></i>
-                        <h3 data-translate-key="feature_dynamic_model_h">동적 모델 관리</h3>
-                        <p data-translate-key="feature_dynamic_model_p">실시간으로 YOLO 모델을 변경하고 신뢰도 임계값을 조절하여 다양한 환경에 최적화할 수 있습니다.</p>
+                        <h3>동적 모델 관리</h3>
+                        <p>실시간으로 YOLO 모델을 변경하고 신뢰도 임계값을 조절하여 다양한 환경에 최적화할 수 있습니다.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
                     <div class="feature-card text-center">
                         <i class="fab fa-discord icon mb-3"></i>
-                        <h3 data-translate-key="feature_discord_integration_h">디스코드 연동</h3>
-                        <p data-translate-key="feature_discord_integration_p">분석된 결과 이미지와 함께 원하는 메시지를 디스코드 채널로 즉시 전송할 수 있습니다.</p>
+                        <h3>디스코드 연동</h3>
+                        <p>분석된 결과 이미지와 함께 원하는 메시지를 디스코드 채널로 즉시 전송할 수 있습니다.</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4" data-aos="fade-left" data-aos-delay="700">
                     <div class="feature-card text-center">
                         <i class="fas fa-tachometer-alt icon mb-3"></i>
-                        <h3 data-translate-key="feature_performance_h">성능 최적화</h3>
-                        <p data-translate-key="feature_performance_p">게으른 로딩 방식으로 앱 시작 시 리소스 소모를 최소화하고 쾌적한 사용 환경을 제공합니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Model Download & Roboflow Section -->
-    <section id="model-download" class="py-5">
-        <div class="container py-5">
-            <h2 class="text-center mb-5" data-aos="fade-down" data-translate-key="model_download_title">YOLO 모델 다운로드 및 커스텀 모델 제작</h2>
-            <p class="text-center lead mb-4" data-aos="fade-up" data-translate-key="yolo_model_download_desc">
-                YoLuWa!에서 사용 가능한 다양한 사전 훈련된 YOLO 모델들을 다운로드하고, Roboflow를 통해 자신만의 커스텀 모델을 체험하고 제작할 수 있습니다.
-            </p>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-6 col-lg-5" data-aos="fade-right">
-                    <div class="model-card text-center">
-                        <i class="fas fa-cloud-download-alt icon mb-3"></i>
-                        <h3 data-translate-key="download_pretrained_models_h">사전 훈련된 YOLO 모델 다운로드</h3>
-                        <p data-translate-key="download_pretrained_models_p">Ultralytics에서 공식적으로 제공하는 다양한 크기와 성능의 YOLOv8 모델들을 다운로드하여 YoLuWa! 앱에서 바로 사용해보세요.</p>
-                        <a href="https://docs.ultralytics.com/models/yolov8/#models" target="_blank" class="btn btn-primary btn-lg mt-3" id="ultralyticsWebsiteBtn">Ultralytics 웹사이트로 이동</a>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-5" data-aos="fade-left">
-                    <div class="model-card text-center">
-                        <i class="fas fa-magic icon mb-3"></i>
-                        <h3 data-translate-key="roboflow_intro_h">Roboflow로 나만의 YOLO 모델 만들기</h3>
-                        <p data-translate-key="roboflow_intro_p1">Roboflow는 데이터셋 관리, 어노테이션, 전처리, 증강 및 모델 훈련까지, YOLO 모델 개발의 모든 과정을 지원하는 강력한 플랫폼입니다. 미리 학습된 모델들을 체험해보고 자신만의 데이터를 활용해 새로운 모델을 만들어보세요!</p>
-                        <a href="https://roboflow.com/models" target="_blank" class="btn btn-secondary me-2 mt-3" id="roboflowExploreBtn">Roboflow 모델 체험하기</a>
-                        <a href="https://roboflow.com/" target="_blank" class="btn btn-primary mt-3" id="roboflowCreateBtn">Roboflow에서 모델 만들기</a>
+                        <h3>성능 최적화</h3>
+                        <p>게으른 로딩 방식으로 앱 시작 시 리소스 소모를 최소화하고 쾌적한 사용 환경을 제공합니다.</p>
                     </div>
                 </div>
             </div>
@@ -475,156 +374,134 @@
     </section>
 
     <!-- Installation & Download Section -->
-    <section id="install" class="py-5 bg-light">
+    <section id="install" class="py-5">
         <div class="container py-5">
-            <h2 class="text-center mb-5" data-aos="fade-down" data-translate-key="install_title">설치 및 다운로드</h2>
+            <h2 class="text-center mb-5" data-aos="fade-down">설치 및 다운로드</h2>
             <div data-aos="fade-up" data-aos-delay="100">
                 <!-- Bootstrap Tabs for different versions/OS -->
                 <ul class="nav nav-tabs justify-content-center mb-4" id="installTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="windows-tab" data-bs-toggle="tab" data-bs-target="#windows" type="button" role="tab" aria-controls="windows" aria-selected="true">
-                            <i class="fab fa-windows me-2"></i><span data-translate-key="install_windows_btn">Windows</span>
+                            <i class="fab fa-windows me-2"></i>Windows
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="mac-tab" data-bs-toggle="tab" data-bs-target="#mac" type="button" role="tab" aria-controls="mac" aria-selected="false">
-                            <i class="fab fa-apple me-2"></i><span data-translate-key="install_mac_btn">macOS</span>
+                            <i class="fab fa-apple me-2"></i>macOS
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="linux-tab" data-bs-toggle="tab" data-bs-target="#linux" type="button" role="tab" aria-controls="linux" aria-selected="false">
-                            <i class="fab fa-linux me-2"></i><span data-translate-key="install_linux_btn">Linux</span>
+                            <i class="fab fa-linux me-2"></i>Linux
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="source-tab" data-bs-toggle="tab" data-bs-target="#source" type="button" role="tab" aria-controls="source" aria-selected="false">
-                            <i class="fas fa-code me-2"></i><span data-translate-key="install_source_btn">소스 코드</span>
+                            <i class="fas fa-code me-2"></i>소스 코드
                         </button>
                     </li>
                 </ul>
                 <div class="tab-content" id="installTabsContent">
                     <!-- Windows Installation Tab -->
                     <div class="tab-pane fade show active" id="windows" role="tabpanel" aria-labelledby="windows-tab">
-                        <h3 class="mb-3 text-center" data-translate-key="install_windows_h">Windows용 YoLuWa! 설치 (추천)</h3>
-                        <p data-translate-key="install_windows_p">Windows 사용자분들께서는 다음 단계를 따라 간편하게 YoLuWa!를 설치하고 실행할 수 있습니다.</p>
+                        <h3 class="mb-3 text-center">Windows용 YoLuWa! 설치 (추천)</h3>
+                        <p>Windows 사용자분들께서는 다음 단계를 따라 간편하게 YoLuWa!를 설치하고 실행할 수 있습니다.</p>
                         <ol>
-                            <li><strong class="text-primary" data-translate-key="install_step1_h">최신 버전 다운로드:</strong> <span data-translate-key="install_step1_p">아래 버튼을 클릭하여 YoLuWa! Windows 실행 파일을 다운로드합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_step2_h">YOLO 모델 파일 준비:</strong> <span data-translate-key="install_step2_p">사용하실 <code>.pt</code> 형식의 YOLO 모델 파일을 미리 준비해 둡니다. (예: <code>yolov8n.pt</code>)</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_step3_h">IP WebCam 앱 설치:</strong> <span data-translate-key="install_step3_p">휴대폰에 <a href="https://play.google.com/store/apps/details?id=com.pas.webcam" target="_blank">IP WebCam</a> (안드로이드) 또는 유사한 iOS 앱을 설치하고 실행하여 스트리밍 URL을 확인합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_step4_h">YoLuWa! 실행:</strong> <span data-translate-key="install_step4_p">다운로드한 <code>.exe</code> 파일을 실행하고, 안내에 따라 마스터 비밀번호를 설정합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_step5_h">설정 입력:</strong> <span data-translate-key="install_step5_p">앱 GUI의 설정 섹션에 휴대폰 웹캠 URL, 디스코드 웹훅 URL, 원하는 웹 스트리밍 포트 등을 입력하고 '설정 적용과 저장' 버튼을 클릭합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_step6_h">카메라 시작:</strong> <span data-translate-key="install_step6_p">YOLO 카메라 시작/중지 버튼을 눌러 분석을 시작합니다.</span></li>
+                            <li><strong class="text-primary">최신 버전 다운로드:</strong> 아래 버튼을 클릭하여 YoLuWa! Windows 실행 파일을 다운로드합니다.</li>
+                            <li><strong class="text-primary">YOLO 모델 파일 준비:</strong> 사용하실 <code>.pt</code> 형식의 YOLO 모델 파일을 미리 준비해 둡니다. (예: <code>yolov8n.pt</code>)</li>
+                            <li><strong class="text-primary">IP WebCam 앱 설치:</strong> 휴대폰에 <a href="https://play.google.com/store/apps/details?id=com.pas.webcam" target="_blank">IP WebCam</a> (안드로이드) 또는 유사한 iOS 앱을 설치하고 실행하여 스트리밍 URL을 확인합니다.</li>
+                            <li><strong class="text-primary">YoLuWa! 실행:</strong> 다운로드한 <code>.exe</code> 파일을 실행하고, 안내에 따라 마스터 비밀번호를 설정합니다.</li>
+                            <li><strong class="text-primary">설정 입력:</strong> 앱 GUI의 설정 섹션에 휴대폰 웹캠 URL, 디스코드 웹훅 URL, 원하는 웹 스트리밍 포트 등을 입력하고 "설정 적용 및 저장" 버튼을 클릭합니다.</li>
+                            <li><strong class="text-primary">카메라 시작:</strong> "YOLO 카메라 시작/중지" 버튼을 눌러 분석을 시작합니다.</li>
                         </ol>
                         <div class="text-center mt-4">
                             <!-- 이 버튼은 최신 Windows .exe 링크로 동적으로 업데이트됩니다. -->
-                            <a id="latestWindowsDownload" href="#" class="btn btn-primary btn-lg" data-translate-key="install_windows_download_btn"><i class="fas fa-download me-2"></i>Windows용 최신 버전 다운로드</a>
+                            <a id="latestWindowsDownload" href="#" class="btn btn-primary btn-lg"><i class="fas fa-download me-2"></i>Windows용 최신 버전 다운로드</a>
                         </div>
                     </div>
                     <!-- macOS Installation Tab -->
                     <div class="tab-pane fade" id="mac" role="tabpanel" aria-labelledby="mac-tab">
-                        <h3 class="mb-3 text-center" data-translate-key="install_mac_h">macOS용 YoLuWa! 설치 (Coming Soon)</h3>
-                        <p data-translate-key="install_mac_p1">macOS 버전은 현재 준비 중입니다. 조만간 편리한 설치 프로그램을 제공할 예정입니다.</p>
+                        <h3 class="mb-3 text-center">macOS용 YoLuWa! 설치 (Coming Soon)</h3>
+                        <p>macOS 버전은 현재 준비 중입니다. 조만간 편리한 설치 프로그램을 제공할 예정입니다.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i><span data-translate-key="install_mac_p2"><strong>PyInstaller</strong>를 이용한 앱 번들 제공 예정</span></li>
-                            <li><i class="fas fa-sync-alt text-info me-2"></i><span data-translate-key="install_mac_p3">최적화된 성능과 사용자 경험 제공</span></li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i><strong>PyInstaller</strong>를 이용한 앱 번들 제공 예정</li>
+                            <li><i class="fas fa-sync-alt text-info me-2"></i>최적화된 성능과 사용자 경험 제공</li>
                         </ul>
-                        <p class="text-center mt-4" data-translate-key="install_mac_p4">
+                        <p class="text-center mt-4">
                             그동안 소스 코드를 통해 수동으로 설치하여 사용하실 수 있습니다.
                         </p>
                         <div class="text-center mt-4">
-                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" class="btn btn-outline-info btn-lg" data-translate-key="github_repo_link"><i class="fas fa-code me-2"></i>GitHub 저장소로 이동</a>
+                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" class="btn btn-outline-info btn-lg"><i class="fas fa-code me-2"></i>GitHub 저장소로 이동</a>
                         </div>
                     </div>
                     <!-- Linux Installation Tab -->
                     <div class="tab-pane fade" id="linux" role="tabpanel" aria-labelledby="linux-tab">
-                        <h3 class="mb-3 text-center" data-translate-key="install_linux_h">Linux용 YoLuWa! 설치 (Coming Soon)</h3>
-                        <p data-translate-key="install_linux_p1">Linux 버전은 현재 준비 중입니다. 다양한 배포판에서 안정적으로 동작하는 설치 패키지를 제공할 예정입니다.</p>
+                        <h3 class="mb-3 text-center">Linux용 YoLuWa! 설치 (Coming Soon)</h3>
+                        <p>Linux 버전은 현재 준비 중입니다. 다양한 배포판에서 안정적으로 동작하는 설치 패키지를 제공할 예정입니다.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i><span data-translate-key="install_mac_p2"><strong>AppImage</strong> 또는 <strong>Snap/Flatpak</strong> 패키지 제공 예정</span></li>
-                            <li><i class="fas fa-tools text-warning me-2"></i><span data-translate-key="install_mac_p3">커뮤니티와 협력하여 다양한 환경 지원</span></li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i><strong>AppImage</strong> 또는 <strong>Snap/Flatpak</strong> 패키지 제공 예정</li>
+                            <li><i class="fas fa-tools text-warning me-2"></i>커뮤니티와 협력하여 다양한 환경 지원</li>
                         </ul>
-                        <p class="text-center mt-4" data-translate-key="install_mac_p4">
+                        <p class="text-center mt-4">
                             그동안 소스 코드를 통해 수동으로 설치하여 사용하실 수 있습니다.
                         </p>
                         <div class="text-center mt-4">
-                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" class="btn btn-outline-info btn-lg" data-translate-key="github_repo_link"><i class="fas fa-code me-2"></i>GitHub 저장소로 이동</a>
+                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" class="btn btn-outline-info btn-lg"><i class="fas fa-code me-2"></i>소스 코드 보기</a>
                         </div>
                     </div>
                     <!-- Source Code Tab -->
                     <div class="tab-pane fade" id="source" role="tabpanel" aria-labelledby="source-tab">
-                        <h3 class="mb-3 text-center" data-translate-key="install_source_h">소스 코드로부터 설치 및 실행</h3>
-                        <p data-translate-key="install_source_p">개발자 또는 고급 사용자분들을 위한 소스 코드 설치 가이드입니다.</p>
+                        <h3 class="mb-3 text-center">소스 코드로부터 설치 및 실행</h3>
+                        <p>개발자 또는 고급 사용자분들을 위한 소스 코드 설치 가이드입니다.</p>
                         <ol>
-                            <li><strong class="text-primary" data-translate-key="install_python_install_h">Python 설치:</strong> <span data-translate-key="install_python_install_p">Python 3.8 이상 버전이 설치되어 있는지 확인합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_git_clone_h">Git Clone 또는 다운로드:</strong> <span data-translate-key="install_git_clone_p">YoLuWa! GitHub 저장소에서 소스 코드를 다운로드합니다. (<code>https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME</code>)</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_venv_h">가상 환경 설정 (권장):</strong>
+                            <li><strong class="text-primary">Python 설치:</strong> Python 3.8 이상 버전이 설치되어 있는지 확인합니다.</li>
+                            <li><strong class="text-primary">Git Clone 또는 다운로드:</strong> YoLuWa! GitHub 저장소에서 소스 코드를 다운로드합니다. (<code>https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME</code>)</li>
+                            <li><strong class="text-primary">가상 환경 설정 (권장):</strong>
 <pre><code>python -m venv venv
 ./venv/Scripts/activate # Windows
 source venv/bin/activate # macOS/Linux
 </code></pre>
                             </li>
-                            <li><strong class="text-primary" data-translate-key="install_lib_install_h">필요 라이브러리 설치:</strong>
+                            <li><strong class="text-primary">필요 라이브러리 설치:</strong>
 <pre><code>pip install -r requirements.txt
 # 또는 다음 라이브러리들을 개별 설치
 pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
 </code></pre>
                             </li>
-                            <li><strong class="text-primary" data-translate-key="install_yolo_model_install_h">YOLO 모델 파일 준비:</strong> <span data-translate-key="install_yolo_model_install_p"><code>.pt</code> 형식의 YOLO 모델 파일과 <code>templates</code> 폴더 안의 <code>index.html</code> 파일을 <code>yoluwaPC.py</code>와 같은 디렉토리에 둡니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_yoluwa_exec_h">YoLuWa! 실행:</strong>
+                            <li><strong class="text-primary">YOLO 모델 파일 준비:</strong> <code>.pt</code> 형식의 YOLO 모델 파일과 <code>templates</code> 폴더 안의 <code>index.html</code> 파일을 <code>yoluwaPC.py</code>와 같은 디렉토리에 둡니다.</li>
+                            <li><strong class="text-primary">YoLuWa! 실행:</strong>
 <pre><code>python yoluwaPC.py
 </code></pre>
                             </li>
-                            <li><strong class="text-primary" data-translate-key="install_master_pw_h">최초 설정:</strong> <span data-translate-key="install_master_pw_p">프로그램 최초 실행 시 마스터 비밀번호를 설정합니다.</span></li>
-                            <li><strong class="text-primary" data-translate-key="install_settings_h">설정 입력:</strong> <span data-translate-key="install_settings_p">앱 GUI에서 필요한 설정값(웹캠 URL, 디스코드 웹훅 등)을 입력하고 저장합니다.</span></li>
+                            <li><strong class="text-primary">최초 설정:</strong> 프로그램 최초 실행 시 마스터 비밀번호를 설정합니다.</li>
+                            <li><strong class="text-primary">설정 입력:</strong> 앱 GUI에서 필요한 설정값(웹캠 URL, 디스코드 웹훅 등)을 입력하고 저장합니다.</li>
                         </ol>
                         <div class="text-center mt-4">
-                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/archive/refs/heads/main.zip" target="_blank" class="btn btn-info btn-lg" data-translate-key="source_code_download" id="sourceCodeDownloadBtn"><i class="fas fa-github me-2"></i>소스 코드 다운로드</a>
+                            <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/archive/refs/heads/main.zip" target="_blank" class="btn btn-info btn-lg"><i class="fab fa-github me-2"></i>소스 코드 다운로드</a>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div id="previous-versions-section" class="mt-5" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-center mb-4" data-translate-key="previous_versions_title">이전 버전 다운로드</h3>
-                <p class="text-center text-muted" data-translate-key="previous_versions_desc">특정 환경이나 기능이 필요한 경우, 이전 버전의 YoLuWa!를 다운로드할 수 있습니다.</p>
+                <h3 class="text-center mb-4">이전 버전 다운로드</h3>
+                <p class="text-center text-muted">특정 환경이나 기능이 필요한 경우, 이전 버전의 YoLuWa!를 다운로드할 수 있습니다.</p>
                 <div id="previous-versions-list" class="row">
                     <!-- GitHub API를 통해 동적으로 로드될 릴리스 목록 -->
-                    <p class="text-center" id="previousVersionsLoading" data-translate-key="previous_versions_loading">이전 버전 목록을 로드 중입니다...</p>
+                    <p class="text-center" id="previousVersionsLoading">이전 버전 목록을 로드 중입니다...</p>
                 </div>
-                <p class="text-center text-muted mt-3" id="noDownloadsAvailable" style="display:none;" data-translate-key="no_downloads_available">다운로드 가능한 파일이 없습니다.</p>
             </div>
 
-            <div id="manual-download-section" class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
-                <h3 id="manualDownloadTitle" data-translate-key="manual_download_title">직접 다운로드 링크 (수동 업데이트 필요 시)</h3>
-                <p id="manualDownloadDesc" data-translate-key="manual_download_desc">각 플랫폼에 맞는 최신 버전을 다운로드하세요. 아래 링크는 <strong>수동으로 업데이트</strong>해야 합니다.</p>
-                <a href="#" id="manualWindowsDownload" download class="btn btn-outline-primary btn-lg mt-3 me-3"><i class="fab fa-windows me-2"></i><span data-translate-key="manual_windows_download">Windows (.exe)</span></a>
-                <a href="#" id="manualMacDownload" download class="btn btn-outline-secondary btn-lg mt-3 me-3"><i class="fab fa-apple me-2"></i><span data-translate-key="manual_mac_download">macOS (.zip)</span></a>
-                <a href="#" id="manualLinuxDownload" download class="btn btn-outline-success btn-lg mt-3 me-3"><i class="fab fa-linux me-2"></i><span data-translate-key="manual_linux_download">Linux (.AppImage)</span></a>
-                <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/archive/refs/heads/main.zip" target="_blank" class="btn btn-info btn-lg mt-3" data-translate-key="source_code_download" id="manualSourceDownload"><i class="fas fa-code me-2"></i>소스 코드 다운로드</a>
-                <p class="text-muted mt-3" id="manualUpdateNote" data-translate-key="manual_update_note">
-                    자동 로딩되는 '이전 버전 다운로드' 섹션을 권장하며, 이곳의 링크는 수동으로 업데이트해야 합니다.
+            <div id="download-links" class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
+                <h3>직접 다운로드 링크 (수동 업데이트 필요 시)</h3>
+                <p>각 플랫폼에 맞는 최신 버전을 다운로드하세요. 아래 링크는 <strong>수동으로 업데이트</strong>해야 합니다.</p>
+                <a href="#" id="manualWindowsDownload" download class="btn btn-outline-primary btn-lg mt-3 me-3"><i class="fab fa-windows me-2"></i>Windows (.exe)</a>
+                <a href="#" id="manualMacDownload" download class="btn btn-outline-secondary btn-lg mt-3 me-3"><i class="fab fa-apple me-2"></i>macOS (.zip)</a>
+                <a href="#" id="manualLinuxDownload" download class="btn btn-outline-success btn-lg mt-3 me-3"><i class="fab fa-linux me-2"></i>Linux (.AppImage)</a>
+                <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/archive/refs/heads/main.zip" target="_blank" class="btn btn-outline-info btn-lg mt-3"><i class="fas fa-code me-2"></i>소스 코드 (.zip)</a>
+                <p class="text-muted mt-3">
+                    <small>자동 로딩되는 "이전 버전 다운로드" 섹션을 권장하며, 이곳의 링크는 수동으로 업데이트해야 합니다.</small>
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Donate Section -->
-    <section id="donate" class="py-5 bg-light">
-        <div class="container py-5" data-aos="fade-up">
-            <h2 class="text-center mb-5" data-translate-key="donate_title" id="donateTitle">YoLuWa! 후원하기</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <p class="fs-5" data-translate-key="donate_p1" id="donateP1">
-                        YoLuWa! 프로젝트는 여러분의 관심과 후원으로 발전합니다. 소중한 후원은 개발팀에게 큰 힘이 됩니다. 후원해주신 모든 분들께 진심으로 감사드립니다!
-                    </p>
-                    <div class="account-info">
-                        <p><strong data-translate-key="bank_name" id="bankNameLabel">은행명:</strong> <span id="bankNameValue" data-translate-key="bank_name_value">카카오뱅크</span></p>
-                        <p><strong data-translate-key="account_number" id="accountNumberLabel">계좌번호:</strong> <span id="accountNumberValue">7777-03-5969570</span> 
-                            <button id="copyAccountBtn" class="copy-btn" data-translate-key="copy_account_btn">계좌번호 복사</button>
-                        </p>
-                        <p><strong data-translate-key="account_holder" id="accountHolderLabel">예금주:</strong> <span id="accountHolderValue" data-translate-key="account_holder_value">석*우</span></p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -632,9 +509,9 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
     <!-- Call to Action Section -->
     <section class="cta-section">
         <div class="container" data-aos="zoom-in">
-            <h2 data-translate-key="cta_title">지금 바로 YoLuWa!를 경험해보세요!</h2>
-            <p class="lead" data-translate-key="cta_desc">당신의 비전 AI 프로젝트에 새로운 차원의 편리함과 보안을 더합니다.</p>
-            <a href="#install" class="btn btn-primary btn-lg mt-4 animate__animated animate__headShake animate__infinite" data-translate-key="cta_download_btn">YoLuWa! 다운로드</a>
+            <h2>지금 바로 YoLuWa!를 경험해보세요!</h2>
+            <p class="lead">당신의 비전 AI 프로젝트에 새로운 차원의 편리함과 보안을 더합니다.</p>
+            <a href="#install" class="btn btn-primary btn-lg mt-4 animate__animated animate__headShake animate__infinite">YoLuWa! 다운로드</a>
         </div>
     </section>
 
@@ -643,14 +520,14 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <p data-translate-key="footer_rights">&copy; 2025 YoLuWa!. All Rights Reserved.</p>
-                    <p><span data-translate-key="footer_website">공식 웹사이트:</span> <a href="http://yolo.kro.kr" class="text-white-50">yolo.kro.kr</a></p>
+                    <p>&copy; 2025 YoLuWa!. All Rights Reserved.</p>
+                    <p>공식 웹사이트: <a href="http://yolo.kro.kr" class="text-white-50">yolo.kro.kr</a></p>
                 </div>
                 <div class="col-md-6">
                     <div class="social-icons">
-                        <p class="mb-2"><span data-translate-key="footer_developer">개발자:</span> <a href="https://www.instagram.com/bearman.entp" target="_blank" class="text-white-50">@bearman.entp</a></p>
+                        <p class="mb-2">개발자: <a href="https://www.instagram.com/bearman.entp" target="_blank" class="text-white-50">@bearman.entp</a></p>
                         <a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank"><i class="fab fa-github"></i></a>
-                        <!-- 기타 소셜 미디어 링크 -->
+                        <!-- 기타 소셜 미디어 링크 (필요 시 추가) -->
                         <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
@@ -665,11 +542,6 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
     
     <!-- AOS (Animate On Scroll) JavaScript CDN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- resources.js 파일 로드 (번역 데이터 로직과 WebSocket 로직) -->
-    <!-- 이 파일에 getTranslation, setLanguage, connectWebSocket 등의 함수가 정의됩니다. -->
-    <script src="resources.js"></script> 
-    
     <script>
         // AOS 초기화
         AOS.init({
@@ -680,15 +552,21 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
         // =========================================================
         // GitHub API를 통한 다운로드 정보 및 이전 버전 로딩 (동적 콘텐츠)
         // =========================================================
-        // !!! 주인님: 이 부분에 GitHub 사용자 이름과 리포지토리 이름을 정확히 입력해주세요!
         const GITHUB_REPO_API_URL = "https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/releases";
-        // const GITHUB_TOKEN = "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN"; // 필요시 사용 (API 요청 제한 회피용)
-        let totalDownloadCount = 0; // 전역으로 선언하여 다른 함수에서도 사용 가능하도록
+        
+        // GitHub Personal Access Token (옵션: 요청 제한 초과 시 사용)
+        // Public repo의 공개 정보는 토큰 없이도 가져올 수 있지만,
+        // 요청 제한(60회/시간)을 넘어설 경우 토큰을 사용하면 제한이 완화됩니다 (5000회/시간).
+        // 보안을 위해 실제 웹사이트에서는 서버 측에서 API 호출하거나 환경 변수를 사용하세요.
+        // const GITHUB_TOKEN = "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN"; 
 
         async function fetchGitHubReleases() {
             try {
                 const headers = {};
-                // if (GITHUB_TOKEN) { headers['Authorization'] = `token ${GITHUB_TOKEN}`; }
+                // if (GITHUB_TOKEN) { // 토큰을 사용할 경우 주석 해제
+                //     headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+                // }
+
                 const response = await fetch(GITHUB_REPO_API_URL, { headers: headers });
                 if (!response.ok) {
                     throw new Error(`GitHub API HTTP error! status: ${response.status}`);
@@ -703,39 +581,29 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
 
         async function updateDownloadSection() {
             const releases = await fetchGitHubReleases();
-            totalDownloadCount = 0; // 초기화
+            let totalDownloadCount = 0;
             const previousVersionsList = document.getElementById('previous-versions-list');
-            if (previousVersionsList) previousVersionsList.innerHTML = ''; // 기존 목록 비우기
+            previousVersionsList.innerHTML = ''; // 기존 로딩 메시지 제거
             const latestWindowsDownloadBtn = document.getElementById('latestWindowsDownload');
-            const noDownloadsAvailable = document.getElementById('noDownloadsAvailable');
-            const previousVersionsLoading = document.getElementById('previousVersionsLoading');
-            if (previousVersionsLoading) previousVersionsLoading.style.display = 'none'; // 로딩 메시지 숨기기
-            
-            if (releases.length === 0) {
-                if (document.getElementById('totalDownloadCount')) document.getElementById('totalDownloadCount').innerText = "0";
-                if (noDownloadsAvailable) noDownloadsAvailable.style.display = 'block';
-                if (latestWindowsDownloadBtn) {
-                    latestWindowsDownloadBtn.href = "#"; // 링크 비활성화
-                    latestWindowsDownloadBtn.textContent = getTranslation('no_downloads_available');
-                    latestWindowsDownloadBtn.classList.add('disabled'); // 버튼 비활성화 시각화
-                }
-                // 수동 다운로드 링크도 비활성화 처리
-                const manualWindowsBtn = document.getElementById('manualWindowsDownload');
-                if(manualWindowsBtn) {
-                    manualWindowsBtn.href = "#";
-                    manualWindowsBtn.classList.add('disabled');
-                    manualWindowsBtn.textContent = getTranslation('no_downloads_available');
-                }
-                // 나머지 수동 다운로드 버튼도 필요에 따라 disabled 처리
-                // 예: document.getElementById('manualMacDownload').classList.add('disabled');
+            const manualWindowsDownloadBtn = document.getElementById('manualWindowsDownload'); // 수동 업데이트용 최신 버전 링크
 
+            if (releases.length === 0) {
+                document.getElementById('totalDownloadCount').innerText = "정보 없음";
+                previousVersionsList.innerHTML = '<p class="text-center text-muted">이전 버전 릴리스가 없습니다.</p>';
+                // 최신 다운로드 버튼도 비활성화
+                if (latestWindowsDownloadBtn) {
+                    latestWindowsDownloadBtn.classList.add('disabled');
+                    latestWindowsDownloadBtn.innerText = 'Windows용 최신 버전 (없음)';
+                }
+                if (manualWindowsDownloadBtn) {
+                    manualWindowsDownloadBtn.classList.add('disabled');
+                    manualWindowsDownloadBtn.innerText = 'Windows용 최신 버전 (없음)';
+                }
                 return;
-            } else {
-                if (noDownloadsAvailable) noDownloadsAvailable.style.display = 'none';
             }
 
             // 가장 최신 릴리스 정보 (Windows용 .exe)
-            const latestRelease = releases[0];
+            const latestRelease = releases[0]; // GitHub API는 보통 최신 릴리스부터 반환
             let latestWindowsExeLink = '#';
             if (latestRelease && latestRelease.assets) {
                 const windowsExeAsset = latestRelease.assets.find(asset => asset.name.endsWith('.exe'));
@@ -743,15 +611,11 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                     latestWindowsExeLink = windowsExeAsset.browser_download_url;
                     if (latestWindowsDownloadBtn) {
                         latestWindowsDownloadBtn.href = latestWindowsExeLink;
-                        latestWindowsDownloadBtn.textContent = `${getTranslation('install_windows_download_btn')} (${latestRelease.tag_name})`;
-                        latestWindowsDownloadBtn.classList.remove('disabled'); // 활성화
+                        latestWindowsDownloadBtn.innerText = `Windows용 최신 버전 (${latestRelease.tag_name}) 다운로드`;
                     }
-                    // 수동 다운로드 섹션의 Windows 링크 업데이트
-                    const manualWindowsBtn = document.getElementById('manualWindowsDownload');
-                    if (manualWindowsBtn) {
-                        manualWindowsBtn.href = latestWindowsExeLink;
-                        manualWindowsBtn.textContent = `${getTranslation('manual_windows_download')} (${latestRelease.tag_name})`;
-                        manualWindowsBtn.classList.remove('disabled');
+                     if (manualWindowsDownloadBtn) {
+                        manualWindowsDownloadBtn.href = latestWindowsExeLink;
+                        manualWindowsDownloadBtn.innerText = `Windows용 최신 버전 (${latestRelease.tag_name}) 다운로드`;
                     }
                 }
             }
@@ -774,15 +638,9 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                     } else if (asset.name.endsWith('.AppImage')) {
                         iconClass = 'fab fa-linux';
                         btnClass = 'btn-success';
-                    } else if (asset.name.endsWith('.tar.gz')) { // 추가
-                        iconClass = 'fas fa-box-open';
-                        btnClass = 'btn-warning';
                     } else if (asset.name.endsWith('.deb')) {
                         iconClass = 'fab fa-debian';
                         btnClass = 'btn-success';
-                    } else if (asset.name.endsWith('.msi')) { // 추가
-                        iconClass = 'fas fa-box';
-                        btnClass = 'btn-info';
                     }
 
                     assetsHtml.push(`
@@ -799,11 +657,11 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                         <div class="card">
                             <div class="card-header">
                                 <span class="badge bg-primary me-2">${release.tag_name}</span>
-                                <small class="text-muted">${getTranslation('release_tag_name')}: ${release.tag_name} - ${new Date(release.published_at).toLocaleDateString()}</small>
+                                <small class="text-muted">${new Date(release.published_at).toLocaleDateString()}</small>
                             </div>
                             <div class="card-body">
-                                <p class="card-text">${release.name || release.tag_name} ${getTranslation('release_tag_name')}</p>
-                                <p class="card-text text-muted small">${getTranslation('release_download_count')}: ${releaseDownloadCount}</p>
+                                <p class="card-text">${release.name || release.tag_name} 릴리스</p>
+                                <p class="card-text text-muted small">다운로드 수: ${releaseDownloadCount}</p>
                                 <div class="mt-3">
                                     ${assetsHtml.join('')}
                                 </div>
@@ -811,60 +669,36 @@ pip install opencv-python ultralytics PySide6 requests cryptography qrcode[pil]
                         </div>
                     </div>
                 `;
-                if (previousVersionsList) previousVersionsList.innerHTML += releaseCard;
+                previousVersionsList.innerHTML += releaseCard; // 목록에 추가
             });
 
-            if (document.getElementById('totalDownloadCount')) document.getElementById('totalDownloadCount').innerText = totalDownloadCount;
+            document.getElementById('totalDownloadCount').innerText = totalDownloadCount;
         }
 
+        // 페이지 로드 시 다운로드 정보 업데이트
+        document.addEventListener('DOMContentLoaded', updateDownloadSection);
+
         // =========================================================
-        // 페이지 로드 시 초기화 및 이벤트 리스너 설정
+        // 기타 JavaScript (기존 코드)
         // =========================================================
-        document.addEventListener('DOMContentLoaded', async () => {
-            // 초기 언어 설정 (로컬 스토리지 또는 URL 파라미터, 없으면 기본값)
-            const savedLang = localStorage.getItem('user_language');
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlLang = urlParams.get('lang');
 
-            let initialLang = "ko_KR"; // Default
-            if (urlLang && ['ko_KR', 'en_US', 'de', 'ru', 'ja_JP', 'zh_CN'].includes(urlLang)) { // 지원 언어만 허용
-                initialLang = urlLang;
-            } else if (savedLang && ['ko_KR', 'en_US', 'de', 'ru', 'ja_JP', 'zh_CN'].includes(savedLang)) {
-                initialLang = savedLang;
-            }
-            
-            // 초기 언어 파일을 먼저 로드
-            await loadLanguageFile(initialLang);
-
-            // 웹소켓 연결 (언어 파일 로드 후)
-            connectWebSocket();
-
-            await setLanguage(initialLang); // 초기 언어 적용 (UI 업데이트, 비동기이므로 await)
-
-            // 언어 선택 드롭다운 이벤트 리스너
-            const langSelect = document.getElementById('langSelect');
-            if (langSelect) {
-                langSelect.addEventListener('change', async (event) => { // async 추가
-                    await setLanguage(event.target.value); // await 추가
+        // 부드러운 스크롤 (Optional: Bootstrap 스크롤스파이와 충돌 가능성 있음)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
+            });
+        });
 
-            // 계좌번호 복사 버튼 기능
-            const copyButton = document.getElementById('copyAccountBtn');
-            if (copyButton) {
-                copyButton.addEventListener('click', async () => {
-                    const accountNumber = document.getElementById('accountNumberValue').textContent.trim();
-                    try {
-                        await navigator.clipboard.writeText(accountNumber);
-                        const originalText = copyButton.textContent; // Original text for the button
-                        copyButton.textContent = getTranslation('copied_message'); // Temporarily change text
-                        setTimeout(() => { copyButton.textContent = originalText; }, 2000); // Revert after 2 seconds
-                    } catch (err) {
-                        console.error('Failed to copy text: ', err);
-                        // 실패 시 알림 (이 키는 resources.js에 있음)
-                        alert(getTranslation('copied_message_error')); 
-                    }
-                });
+        // Navbar 스크롤 시 배경색 변경 (Optional)
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled'); 
+            } else {
+                navbar.classList.remove('navbar-scrolled');
             }
         });
     </script>
